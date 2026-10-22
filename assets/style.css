@@ -69,7 +69,10 @@ h1 {
   margin: 0 0 10px;
 }
 h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing: -.03em; }
-.lead { font-size: 1.05rem; color: var(--muted); max-width: 40rem; margin: 0; }
+.lead { font-size: 1.05rem; color: var(--muted); max-width: 44rem; margin: 0; text-wrap: pretty; }
+/* justified text: hyphenate English so the spacing stays even; Korean keeps whole words */
+.lead, .card .what, .slide-text .what { text-align: justify; hyphens: auto; }
+:lang(ko) .lead, :lang(ko) .card .what, :lang(ko) .slide-text .what { hyphens: manual; }
 .from-note {
   display: inline-block;
   background: var(--note);
