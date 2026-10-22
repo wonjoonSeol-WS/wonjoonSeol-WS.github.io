@@ -79,12 +79,6 @@
           </div>
         </li>
       </ul>
-      <nav class="slide-tabs" aria-label="웹사이트가 있는 프로젝트">
-        <a href="#slide-fitgymlog" aria-current="true">FitGymLog</a>
-        <a href="#slide-quietbuzz">QuietBuzz</a>
-        <a href="#slide-subpair">Subpair</a>
-        <a href="#slide-dice-roguelife">Dice Roguelife</a>
-      </nav>
     </section>
 
     <section class="all-projects" aria-labelledby="all-h">
@@ -92,10 +86,11 @@
     <nav class="filters" aria-label="프로젝트 고르기">
       <button type="button" data-filter="all" aria-pressed="true">전체</button>
       <button type="button" data-filter="android" aria-pressed="false">안드로이드</button>
-      <button type="button" data-filter="browser" aria-pressed="false">브라우저</button>
+      <button type="button" data-filter="browser" aria-pressed="false">웹</button>
       <button type="button" data-filter="games" aria-pressed="false">게임</button>
       <button type="button" data-filter="claude" aria-pressed="false">Claude</button>
-      <button type="button" data-filter="desktop" aria-pressed="false">컴퓨터</button>
+      <button type="button" data-filter="desktop" aria-pressed="false">PC</button>
+      <button type="button" data-filter="tools" aria-pressed="false">도구</button>
     </nav>
 
     <ul class="grid">
@@ -135,7 +130,7 @@
         <li class="card" id="subpair" data-group="browser" data-name="Subpair">
           <img class="thumb" src="../assets/thumbs/subpair.webp" width="960" height="504" alt="">
           <div class="card-body">
-          <p class="platform">브라우저</p>
+          <p class="platform">웹</p>
           <h3 class="name">Subpair</h3>
           <p class="here-note">여기서 오셨어요</p>
           <p class="what">넷플릭스와 젤리핀에서 자막 두 줄을 동시에. 대본, 한 줄 다시 듣기, 자동 일시정지까지. 무료 오픈소스 <a href="https://www.languagereactor.com/">Language Reactor</a> 대안입니다.</p>
@@ -179,7 +174,7 @@
         <li class="card" id="nanazip-auto-encoding" data-group="desktop" data-name="NanaZip auto encoding">
           <img class="thumb" src="../assets/thumbs/nanazip-auto-encoding.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">컴퓨터</p>
+          <p class="platform">PC</p>
           <h3 class="name">NanaZip auto encoding</h3>
           <p class="here-note">여기서 오셨어요</p>
           <p class="what">NanaZip으로 압축을 풀 때 파일 이름 인코딩을 알아서 골라 주는 윈도우 우클릭 메뉴. 일본어 ZIP 이름이 더 이상 깨지지 않습니다.</p>
@@ -190,7 +185,7 @@
         <li class="card" id="subsync-repair" data-group="desktop" data-name="subsync-repair">
           <img class="thumb" src="../assets/thumbs/subsync-repair-ko.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">컴퓨터</p>
+          <p class="platform">PC</p>
           <h3 class="name">subsync-repair</h3>
           <p class="here-note">여기서 오셨어요</p>
           <p class="what">중간중간 싱크가 어긋나는 자막을 다른 언어 자막에 맞춰 고칩니다. 명령줄, Bazarr 훅, 로컬 서버로 쓸 수 있습니다.</p>
@@ -198,10 +193,10 @@
           <p class="links"><a class="code" href="https://github.com/wonjoonSeol-WS/subsync-repair" data-goatcounter-click="code-subsync-repair">코드</a></p>
           </div>
         </li>
-        <li class="card" id="otpauth-to-2fas" data-group="desktop" data-name="otpauth-to-2fas">
+        <li class="card" id="otpauth-to-2fas" data-group="tools" data-name="otpauth-to-2fas">
           <img class="thumb" src="../assets/thumbs/otpauth-to-2fas-ko.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">컴퓨터</p>
+          <p class="platform">도구</p>
           <h3 class="name">otpauth-to-2fas</h3>
           <p class="here-note">여기서 오셨어요</p>
           <p class="what">iOS OTP Auth 백업을 풀어 Aegis 보관함으로 만들어, 2FAS나 Aegis로 한 번에 옮깁니다. QR 코드를 하나씩 찍지 않아도 됩니다.</p>
@@ -220,10 +215,11 @@
 
   <script>
     (function () {
-      // Carousel: buttons and tabs scroll the track; the tab for the slide in view is marked current.
+      // Carousel: arrow buttons and arrow keys step through the slides; it also moves on its own every 5 s,
+      // pausing while the pointer or keyboard focus is on it, and never for people who prefer reduced motion.
+      var carousel = document.querySelector('.carousel');
       var track = document.querySelector('.track');
       var slides = Array.prototype.slice.call(track.children);
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.slide-tabs a'));
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function current() { return Math.round(track.scrollLeft / track.clientWidth); }
       function go(i) {
@@ -233,21 +229,16 @@
       document.querySelectorAll('.step').forEach(function (b) {
         b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
       });
-      tabs.forEach(function (a, i) {
-        a.addEventListener('click', function (e) { e.preventDefault(); go(i); });
-      });
-      var tick;
-      track.addEventListener('scroll', function () {
-        clearTimeout(tick);
-        tick = setTimeout(function () {
-          var c = current();
-          tabs.forEach(function (a, i) { if (i === c) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-        }, 60);
-      });
       track.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
       });
+      var paused = false;
+      carousel.addEventListener('pointerenter', function () { paused = true; });
+      carousel.addEventListener('pointerleave', function () { paused = false; });
+      carousel.addEventListener('focusin', function () { paused = true; });
+      carousel.addEventListener('focusout', function () { paused = false; });
+      if (!reduce) setInterval(function () { if (!paused && !document.hidden) go(current() + 1); }, 5000);
 
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));

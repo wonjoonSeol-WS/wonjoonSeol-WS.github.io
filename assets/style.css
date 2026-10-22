@@ -142,10 +142,6 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
   letter-spacing: -.02em;
   margin: 0;
 }
-.slide-tabs { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 18px; border-top: 1px solid var(--line); }
-.slide-tabs a { color: var(--muted); text-decoration: none; padding-top: 10px; margin-top: -1px; border-top: 2px solid transparent; font-weight: 500; }
-.slide-tabs a:hover { color: var(--ink); }
-.slide-tabs a[aria-current] { color: var(--ink); border-top-color: var(--ink); }
 
 /* platform filter chips */
 .all-projects { margin-top: 72px; border-top: 2px solid var(--ink); padding-top: 18px; }
@@ -161,7 +157,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 
 /* every project in one grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 48px 36px; }
-.card { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 16px; }
+.card { display: flex; flex-direction: column; gap: 14px; align-self: start; scroll-margin-top: 16px; }
 .card .thumb { border-radius: 8px; }
 .card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .platform { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
@@ -174,16 +170,16 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
   letter-spacing: -.01em;
   margin: 0;
 }
-.card .what { font-size: 16px; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card .what { font-size: 16px; line-height: 1.5; }
 .card .warn { font-size: 13.5px; padding: 6px 10px; }
-.card .links { margin-top: auto; padding-top: 4px; gap: 8px 16px; font-size: 15px; }
+.card .links { padding-top: 4px; gap: 8px 16px; font-size: 15px; }
 .card .try { padding: 5px 12px; }
 .thumb-type span { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 
 /* desktop: a lone card on the last row spans it, thumbnail beside the text */
 @media (min-width: 1100px) {
   .card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 36px; align-items: center; }
-  .card.wide .what { -webkit-line-clamp: unset; max-width: 40rem; }
+  .card.wide .what { max-width: 40rem; }
 }
 
 /* the project the visitor came from */
@@ -199,7 +195,6 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 @media (max-width: 760px) {
   .carousel { margin-top: 28px; }
   .slide { grid-template-columns: minmax(0, 1fr); gap: 18px; align-items: start; }
-  .slide-tabs { gap: 4px 16px; font-size: 15px; }
   .all-projects { margin-top: 48px; }
 }
 @media (max-width: 600px) {
@@ -207,7 +202,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
   .grid { gap: 18px; }
   .card { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 0 12px; align-items: start; }
   .card .thumb { aspect-ratio: 4 / 3; }
-  .card .what { -webkit-line-clamp: 2; font-size: 14px; }
+  .card .what { font-size: 14px; }
   .name { font-size: 1.15rem; }
 }
 

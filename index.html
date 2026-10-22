@@ -78,12 +78,6 @@
           </div>
         </li>
       </ul>
-      <nav class="slide-tabs" aria-label="Projects with their own website">
-        <a href="#slide-fitgymlog" aria-current="true">FitGymLog</a>
-        <a href="#slide-quietbuzz">QuietBuzz</a>
-        <a href="#slide-subpair">Subpair</a>
-        <a href="#slide-dice-roguelife">Dice Roguelife</a>
-      </nav>
     </section>
 
     <section class="all-projects" aria-labelledby="all-h">
@@ -91,10 +85,11 @@
     <nav class="filters" aria-label="Show projects for">
       <button type="button" data-filter="all" aria-pressed="true">All</button>
       <button type="button" data-filter="android" aria-pressed="false">Android</button>
-      <button type="button" data-filter="browser" aria-pressed="false">Browser</button>
+      <button type="button" data-filter="browser" aria-pressed="false">Web</button>
       <button type="button" data-filter="games" aria-pressed="false">Games</button>
       <button type="button" data-filter="claude" aria-pressed="false">Claude</button>
-      <button type="button" data-filter="desktop" aria-pressed="false">Computer</button>
+      <button type="button" data-filter="desktop" aria-pressed="false">PC</button>
+      <button type="button" data-filter="tools" aria-pressed="false">Tools</button>
     </nav>
 
     <ul class="grid">
@@ -134,7 +129,7 @@
         <li class="card" id="subpair" data-group="browser" data-name="Subpair">
           <img class="thumb" src="./assets/thumbs/subpair.webp" width="960" height="504" alt="">
           <div class="card-body">
-          <p class="platform">Browser</p>
+          <p class="platform">Web</p>
           <h3 class="name">Subpair</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Two subtitle lines at once on Netflix and Jellyfin, with a transcript, line replay and auto-pause. A free, open alternative to <a href="https://www.languagereactor.com/">Language Reactor</a>.</p>
@@ -178,7 +173,7 @@
         <li class="card" id="nanazip-auto-encoding" data-group="desktop" data-name="NanaZip auto encoding">
           <img class="thumb" src="./assets/thumbs/nanazip-auto-encoding.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">Computer</p>
+          <p class="platform">PC</p>
           <h3 class="name">NanaZip auto encoding</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Windows right-click menus that extract with NanaZip and pick the file name encoding for you, so Japanese ZIPs stop coming out garbled.</p>
@@ -189,7 +184,7 @@
         <li class="card" id="subsync-repair" data-group="desktop" data-name="subsync-repair">
           <img class="thumb" src="./assets/thumbs/subsync-repair-en.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">Computer</p>
+          <p class="platform">PC</p>
           <h3 class="name">subsync-repair</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Fixes subtitles whose timing drifts in pieces by aligning them to a subtitle in another language. Command line, Bazarr hook, and a local server.</p>
@@ -197,10 +192,10 @@
           <p class="links"><a class="code" href="https://github.com/wonjoonSeol-WS/subsync-repair" data-goatcounter-click="code-subsync-repair">Code</a></p>
           </div>
         </li>
-        <li class="card" id="otpauth-to-2fas" data-group="desktop" data-name="otpauth-to-2fas">
+        <li class="card" id="otpauth-to-2fas" data-group="tools" data-name="otpauth-to-2fas">
           <img class="thumb" src="./assets/thumbs/otpauth-to-2fas-en.webp" width="960" height="504" alt="" loading="lazy">
           <div class="card-body">
-          <p class="platform">Computer</p>
+          <p class="platform">Tools</p>
           <h3 class="name">otpauth-to-2fas</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Moves your codes from OTP Auth on iOS to 2FAS or Aegis in one step, by decrypting the backup into an Aegis vault. No QR codes one by one.</p>
@@ -219,10 +214,11 @@
 
   <script>
     (function () {
-      // Carousel: buttons and tabs scroll the track; the tab for the slide in view is marked current.
+      // Carousel: arrow buttons and arrow keys step through the slides; it also moves on its own every 5 s,
+      // pausing while the pointer or keyboard focus is on it, and never for people who prefer reduced motion.
+      var carousel = document.querySelector('.carousel');
       var track = document.querySelector('.track');
       var slides = Array.prototype.slice.call(track.children);
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.slide-tabs a'));
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function current() { return Math.round(track.scrollLeft / track.clientWidth); }
       function go(i) {
@@ -232,21 +228,16 @@
       document.querySelectorAll('.step').forEach(function (b) {
         b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
       });
-      tabs.forEach(function (a, i) {
-        a.addEventListener('click', function (e) { e.preventDefault(); go(i); });
-      });
-      var tick;
-      track.addEventListener('scroll', function () {
-        clearTimeout(tick);
-        tick = setTimeout(function () {
-          var c = current();
-          tabs.forEach(function (a, i) { if (i === c) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-        }, 60);
-      });
       track.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
       });
+      var paused = false;
+      carousel.addEventListener('pointerenter', function () { paused = true; });
+      carousel.addEventListener('pointerleave', function () { paused = false; });
+      carousel.addEventListener('focusin', function () { paused = true; });
+      carousel.addEventListener('focusout', function () { paused = false; });
+      if (!reduce) setInterval(function () { if (!paused && !document.hidden) go(current() + 1); }, 5000);
 
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));

@@ -151,6 +151,12 @@ export const groups = [
         },
         code: gh('subsync-repair'),
       },
+    ],
+  },
+  {
+    id: 'tools',
+    name: { en: 'Tools', ko: '도구' },
+    projects: [
       {
         id: 'otpauth-to-2fas',
         thumb: { en: 'otpauth-to-2fas-en.webp', ko: 'otpauth-to-2fas-ko.webp' },

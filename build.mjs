@@ -57,10 +57,11 @@ const text = {
 // short platform names: the filter chips and the label on each card
 const SHORT = {
   android: { en: 'Android', ko: '안드로이드' },
-  browser: { en: 'Browser', ko: '브라우저' },
+  browser: { en: 'Web', ko: '웹' },
   games: { en: 'Games', ko: '게임' },
   claude: { en: 'Claude', ko: 'Claude' },
-  desktop: { en: 'Computer', ko: '컴퓨터' },
+  desktop: { en: 'PC', ko: 'PC' },
+  tools: { en: 'Tools', ko: '도구' },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -164,9 +165,6 @@ function page(lang) {
       </div>
       <ul class="track" tabindex="0">${featured.map((p, i) => slide(p, lang, i, featured.length)).join('')}
       </ul>
-      <nav class="slide-tabs" aria-label="${t.sites}">
-        ${featured.map((p, i) => `<a href="#slide-${p.id}"${i === 0 ? ' aria-current="true"' : ''}>${esc(pick(p.name, lang))}</a>`).join('\n        ')}
-      </nav>
     </section>
 
     <section class="all-projects" aria-labelledby="all-h">
@@ -188,10 +186,11 @@ function page(lang) {
 
   <script>
     (function () {
-      // Carousel: buttons and tabs scroll the track; the tab for the slide in view is marked current.
+      // Carousel: arrow buttons and arrow keys step through the slides; it also moves on its own every 5 s,
+      // pausing while the pointer or keyboard focus is on it, and never for people who prefer reduced motion.
+      var carousel = document.querySelector('.carousel');
       var track = document.querySelector('.track');
       var slides = Array.prototype.slice.call(track.children);
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.slide-tabs a'));
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       function current() { return Math.round(track.scrollLeft / track.clientWidth); }
       function go(i) {
@@ -201,21 +200,16 @@ function page(lang) {
       document.querySelectorAll('.step').forEach(function (b) {
         b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
       });
-      tabs.forEach(function (a, i) {
-        a.addEventListener('click', function (e) { e.preventDefault(); go(i); });
-      });
-      var tick;
-      track.addEventListener('scroll', function () {
-        clearTimeout(tick);
-        tick = setTimeout(function () {
-          var c = current();
-          tabs.forEach(function (a, i) { if (i === c) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-        }, 60);
-      });
       track.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
       });
+      var paused = false;
+      carousel.addEventListener('pointerenter', function () { paused = true; });
+      carousel.addEventListener('pointerleave', function () { paused = false; });
+      carousel.addEventListener('focusin', function () { paused = true; });
+      carousel.addEventListener('focusout', function () { paused = false; });
+      if (!reduce) setInterval(function () { if (!paused && !document.hidden) go(current() + 1); }, 5000);
 
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));
