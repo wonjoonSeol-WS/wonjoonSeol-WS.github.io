@@ -82,8 +82,8 @@ export const groups = [
         thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp' },
         name: 'Dice Roguelife',
         what: {
-          en: 'A roguelike chat game. Dice roll your world, race and talent, and an AI narrates each life like a web novel. Play it in Claude with no setup, or run it on your computer with your own API key or a local model.',
-          ko: '주사위가 세계, 종족, 재능을 정하고 AI가 그 인생을 웹소설처럼 들려주는 로그라이크 채팅 게임. 설치 없이 Claude에서 하거나, 내 컴퓨터에서 API 키나 로컬 모델로 돌릴 수 있어요.',
+          en: 'Open-source alternative to [Crack](https://crack.wrtn.ai/), the Korean AI character chat app: a roguelike AI chat game you play on your Claude subscription.',
+          ko: '오픈소스 [크랙AI](https://crack.wrtn.ai/) - 구독제로 즐기는 로그라이크 AI 채팅 게임',
         },
         try: { en: site('dice-roguelife'), ko: site('dice-roguelife') + '?lang=ko' },
         tryLabel: { en: 'Play in Claude', ko: 'Claude에서 하기' },
