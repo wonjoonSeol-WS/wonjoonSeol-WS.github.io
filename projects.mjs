@@ -169,4 +169,20 @@ export const groups = [
       },
     ],
   },
+  {
+    id: 'deprecated',
+    name: { en: 'Deprecated', ko: '지원 종료' },
+    projects: [
+      {
+        id: 'property-times',
+        thumb: { en: 'property-times.webp' },
+        name: { en: 'Property Times', ko: '부동산 Times' },
+        what: {
+          en: 'Korean real estate YouTube as a New York Times-style front page. Claude writes each new video from the channels you follow up as an article, with key points and links to the apartments it mentions. Archived and no longer maintained.',
+          ko: '부동산 유튜브를 뉴욕타임스 1면처럼 보여 줍니다. 구독한 채널의 새 영상을 Claude가 기사로 정리하고, 핵심 포인트와 언급된 아파트 링크를 붙여 줍니다. 보관된 프로젝트로 더 이상 관리하지 않습니다.',
+        },
+        code: gh('property-times'),
+      },
+    ],
+  },
 ];

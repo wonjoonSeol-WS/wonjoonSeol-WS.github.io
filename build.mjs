@@ -62,6 +62,7 @@ const SHORT = {
   claude: { en: 'Claude', ko: 'Claude' },
   desktop: { en: 'PC', ko: 'PC' },
   tools: { en: 'Tools', ko: '도구' },
+  deprecated: { en: 'Deprecated', ko: '지원 종료' },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
