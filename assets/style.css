@@ -157,7 +157,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 
 /* every project in one grid */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 48px 36px; }
-.card { display: flex; flex-direction: column; gap: 14px; align-self: start; scroll-margin-top: 16px; }
+.card { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 16px; }
 .card .thumb { border-radius: 8px; }
 .card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .platform { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
@@ -172,7 +172,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 }
 .card .what { font-size: 16px; line-height: 1.5; }
 .card .warn { font-size: 13.5px; padding: 6px 10px; }
-.card .links { padding-top: 4px; gap: 8px 16px; font-size: 15px; }
+.card .links { margin-top: auto; padding-top: 4px; gap: 8px 16px; font-size: 15px; min-height: 38px; }
 .card .try { padding: 5px 12px; }
 .thumb-type span { font-size: clamp(1.6rem, 3vw, 2.2rem); }
 
