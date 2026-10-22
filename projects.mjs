@@ -28,14 +28,15 @@ export const groups = [
         thumb: { en: 'quietbuzz-en.webp', ko: 'quietbuzz-ko.webp' },
         name: 'QuietBuzz',
         what: {
-          en: 'Keep the phone on vibrate and only the apps you pick still buzz. Everything else shows up silently. No Do Not Disturb needed.',
-          ko: '진동 모드에서 고른 앱만 진동이 울립니다. 나머지 알림은 조용히 표시됩니다. 방해 금지 모드는 필요 없습니다.',
+          en: 'Turn off vibration for every app in one tap, instead of going through them one by one. Only the apps you pick still buzz, and every notification still shows up.',
+          ko: '모든 앱의 진동을 한 번에 끕니다. 앱마다 하나씩 끌 필요 없이, 고른 앱만 계속 진동하고 알림은 그대로 옵니다.',
         },
         try: { en: site('quietbuzz'), ko: site('quietbuzz') },
         code: gh('quietbuzz'),
       },
       {
         id: 'morphe-patches',
+        thumb: { en: 'morphe-patches.webp' },
         name: 'Block KakaoPay',
         what: {
           en: 'A Morphe patch bundle for KakaoTalk: turns off KakaoPay on a patched app and removes the ad slots other patch sources leave behind.',
@@ -83,6 +84,7 @@ export const groups = [
       },
       {
         id: 'language-mistake-tracker',
+        thumb: { en: 'language-mistake-tracker.webp' },
         name: 'Language mistake tracker',
         what: {
           en: 'Turns the corrections Claude gives you in chat into a review sheet: your most common mistakes, repeated habits and rules with memory tricks.',
