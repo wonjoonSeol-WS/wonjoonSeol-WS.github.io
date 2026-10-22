@@ -34,9 +34,9 @@ const text = {
   },
   ko: {
     title: 'Wonjoon Seol: 프로젝트',
-    description: 'Wonjoon Seol이 만든 작은 프로젝트 모음: 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구.',
+    description: 'Wonjoon Seol이 만든 작은 프로젝트를 모아 뒀어요. 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구가 있어요.',
     h1: '작은 도구들, 마음껏 써 보세요.',
-    lead: '제 불편을 풀려고 만든 것들을 GitHub에 올려 두었습니다. 잘 다듬은 것도, 대충 만든 것도 있어요. 어디서 쓸지로 골라 보세요.',
+    lead: '제가 불편해서 만든 것들을 GitHub에 올려 뒀어요. 잘 다듬은 것도, 대충 만든 것도 있어요. 어디서 쓸지 골라 보세요.',
     by: 'GitHub의 Wonjoon Seol',
     sites: '웹사이트가 있는 프로젝트',
     prev: '이전 프로젝트',
