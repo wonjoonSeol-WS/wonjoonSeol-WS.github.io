@@ -3,6 +3,7 @@
 // `warn` is shown above the links when trying it blindly can hurt. `what` may contain [text](https://...) links.
 // `also` is an optional second way to use it ({ label, url }).
 // `try` is where someone can start using it; `code` is the repo.
+// `deprecated` marks an archived project on its card.
 // Groups are shown in this order, and projects in the order listed.
 const gh = (repo) => `https://github.com/wonjoonSeol-WS/${repo}`;
 const site = (repo) => `https://wonjoonseol-ws.github.io/${repo}/`;
@@ -69,6 +70,17 @@ export const groups = [
         },
         try: { en: site('subpair'), ko: site('subpair') + 'ko/' },
         code: gh('subpair'),
+      },
+      {
+        id: 'property-times',
+        deprecated: true,
+        thumb: { en: 'property-times.webp' },
+        name: { en: 'Property Times', ko: '부동산 Times' },
+        what: {
+          en: 'LLM summaries, tags and a watch-or-skip rating for new videos from Korean real estate YouTube channels, built from subtitles pulled with yt-dlp. Archived and no longer maintained.',
+          ko: '부동산 유튜브 채널의 새 영상을 yt-dlp로 가져온 자막으로 LLM이 요약하고, 태그를 달고, 직접 볼 만한지 평가합니다. 보관된 프로젝트로 더 이상 관리하지 않습니다.',
+        },
+        code: gh('property-times'),
       },
     ],
   },
@@ -166,22 +178,6 @@ export const groups = [
           ko: 'iOS OTP Auth 백업을 풀어 Aegis 보관함으로 만들어, 2FAS나 Aegis로 한 번에 옮깁니다. QR 코드를 하나씩 찍지 않아도 됩니다.',
         },
         code: gh('otpauth-to-2fas'),
-      },
-    ],
-  },
-  {
-    id: 'deprecated',
-    name: { en: 'Deprecated', ko: '지원 종료' },
-    projects: [
-      {
-        id: 'property-times',
-        thumb: { en: 'property-times.webp' },
-        name: { en: 'Property Times', ko: '부동산 Times' },
-        what: {
-          en: 'LLM summaries, tags and a watch-or-skip rating for new videos from Korean real estate YouTube channels, built from subtitles pulled with yt-dlp. Archived and no longer maintained.',
-          ko: '부동산 유튜브 채널의 새 영상을 yt-dlp로 가져온 자막으로 LLM이 요약하고, 태그를 달고, 직접 볼 만한지 평가합니다. 보관된 프로젝트로 더 이상 관리하지 않습니다.',
-        },
-        code: gh('property-times'),
       },
     ],
   },

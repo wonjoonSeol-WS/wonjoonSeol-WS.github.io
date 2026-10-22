@@ -23,6 +23,7 @@ const text = {
     everything: 'All',
     try: 'Try it',
     code: 'Code',
+    deprecated: 'Deprecated',
     fromNote: (name) => `You came from ${name}. Here is everything else.`,
     here: 'You came from this one',
     footer: 'Everything is free and open source. Found a bug? Open an issue on that project.',
@@ -45,6 +46,7 @@ const text = {
     everything: '전체',
     try: '써 보기',
     code: '코드',
+    deprecated: '지원 종료',
     fromNote: (name) => `${name}에서 오셨네요. 나머지 프로젝트도 둘러보세요.`,
     here: '여기서 오셨어요',
     footer: '모두 무료 오픈소스입니다. 버그를 찾으면 해당 프로젝트에 이슈를 남겨 주세요.',
@@ -62,7 +64,6 @@ const SHORT = {
   claude: { en: 'Claude', ko: 'Claude' },
   desktop: { en: 'PC', ko: 'PC' },
   tools: { en: 'Tools', ko: '도구' },
-  deprecated: { en: 'Deprecated', ko: '지원 종료' },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -109,7 +110,7 @@ function card(p, g, lang, i) {
         <li class="card" id="${p.id}" data-group="${g.id}" data-name="${esc(pick(p.name, lang))}">
           ${thumb(p, lang, i < 4)}
           <div class="card-body">
-          <p class="platform">${esc(pick(SHORT[g.id], lang))}</p>
+          <p class="platform">${esc(pick(SHORT[g.id], lang))}${p.deprecated ? `<span class="deprecated">${t.deprecated}</span>` : ''}</p>
           <h3 class="name">${esc(pick(p.name, lang))}</h3>
           <p class="here-note">${t.here}</p>
           <p class="what">${rich(pick(p.what, lang))}</p>

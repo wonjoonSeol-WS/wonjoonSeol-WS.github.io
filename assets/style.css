@@ -164,7 +164,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 .card .thumb { border-radius: 8px; }
 .card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .platform { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
-.card[data-group="deprecated"] .platform { color: var(--danger); }
+.platform .deprecated { margin-left: 8px; color: var(--danger); }
 .name {
   font-family: var(--display);
   font-variation-settings: "wdth" 80;
