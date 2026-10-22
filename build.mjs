@@ -14,6 +14,11 @@ const text = {
     h1: 'Small tools, free to try.',
     lead: 'Things I built for my own problems and put on GitHub. Some are polished, some are slop. Pick one by where you would use it.',
     by: 'Wonjoon Seol on GitHub',
+    sites: 'Projects with their own website',
+    prev: 'Previous project',
+    next: 'Next project',
+    visit: 'Visit the site',
+    allProjects: 'All projects',
     filter: 'Show projects for',
     everything: 'All',
     try: 'Try it',
@@ -31,6 +36,11 @@ const text = {
     h1: '작은 도구들, 마음껏 써 보세요.',
     lead: '제 불편을 풀려고 만든 것들을 GitHub에 올려 두었습니다. 잘 다듬은 것도, 대충 만든 것도 있어요. 어디서 쓸지로 골라 보세요.',
     by: 'GitHub의 Wonjoon Seol',
+    sites: '웹사이트가 있는 프로젝트',
+    prev: '이전 프로젝트',
+    next: '다음 프로젝트',
+    visit: '사이트 가기',
+    allProjects: '전체 프로젝트',
     filter: '프로젝트 고르기',
     everything: '전체',
     try: '써 보기',
@@ -77,6 +87,20 @@ function links(p, lang) {
   return `<p class="links">${tryUrl ? `<a class="try" href="${esc(tryUrl)}"${count(`try-${p.id}`)}>${esc(tryLabel)}</a>` : ''}${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>`;
 }
 
+function slide(p, lang, i, n) {
+  const t = text[lang];
+  return `
+        <li class="slide" id="slide-${p.id}" aria-roledescription="slide" aria-label="${i + 1} / ${n}: ${esc(pick(p.name, lang))}">
+          <a class="slide-shot" href="${esc(pick(p.try, lang))}" tabindex="-1"${count(`slide-${p.id}`)}>${thumb(p, lang, i === 0)}</a>
+          <div class="slide-text">
+            <h3 class="slide-name">${esc(pick(p.name, lang))}</h3>
+            <p class="what">${rich(pick(p.what, lang))}</p>
+          ${warn(p, lang)}
+            <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
+          </div>
+        </li>`;
+}
+
 function card(p, g, lang, i) {
   const t = text[lang];
   return `
@@ -96,6 +120,7 @@ function card(p, g, lang, i) {
 function page(lang) {
   const t = text[lang];
   const other = lang === 'en' ? 'ko' : 'en';
+  const featured = groups.flatMap((g) => g.projects).filter((p) => p.featured);
   return `<!doctype html>
 <html lang="${lang}">
 <head>
@@ -129,6 +154,23 @@ function page(lang) {
       <p class="from-note" hidden></p>
     </section>
 
+    <section class="carousel" aria-roledescription="carousel" aria-labelledby="sites-h">
+      <div class="carousel-head">
+        <h2 id="sites-h">${t.sites}</h2>
+        <div class="carousel-controls">
+          <button type="button" class="step" data-step="-1" aria-label="${t.prev}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="step" data-step="1" aria-label="${t.next}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+      <ul class="track" tabindex="0">${featured.map((p, i) => slide(p, lang, i, featured.length)).join('')}
+      </ul>
+      <nav class="slide-tabs" aria-label="${t.sites}">
+        ${featured.map((p, i) => `<a href="#slide-${p.id}"${i === 0 ? ' aria-current="true"' : ''}>${esc(pick(p.name, lang))}</a>`).join('\n        ')}
+      </nav>
+    </section>
+
+    <section class="all-projects" aria-labelledby="all-h">
+    <h2 class="section-h" id="all-h">${t.allProjects}</h2>
     <nav class="filters" aria-label="${t.filter}">
       <button type="button" data-filter="all" aria-pressed="true">${t.everything}</button>
       ${groups.map((g) => `<button type="button" data-filter="${g.id}" aria-pressed="false">${esc(pick(SHORT[g.id], lang))}</button>`).join('\n      ')}
@@ -136,6 +178,7 @@ function page(lang) {
 
     <ul class="grid">${groups.flatMap((g) => g.projects.map((p) => [p, g])).map(([p, g], i) => card(p, g, lang, i)).join('')}
     </ul>
+    </section>
   </main>
 
   <footer class="bottom wrap">
@@ -145,16 +188,53 @@ function page(lang) {
 
   <script>
     (function () {
+      // Carousel: buttons and tabs scroll the track; the tab for the slide in view is marked current.
+      var track = document.querySelector('.track');
+      var slides = Array.prototype.slice.call(track.children);
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.slide-tabs a'));
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function current() { return Math.round(track.scrollLeft / track.clientWidth); }
+      function go(i) {
+        i = (i + slides.length) % slides.length;
+        track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+      }
+      document.querySelectorAll('.step').forEach(function (b) {
+        b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
+      });
+      tabs.forEach(function (a, i) {
+        a.addEventListener('click', function (e) { e.preventDefault(); go(i); });
+      });
+      var tick;
+      track.addEventListener('scroll', function () {
+        clearTimeout(tick);
+        tick = setTimeout(function () {
+          var c = current();
+          tabs.forEach(function (a, i) { if (i === c) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+        }, 60);
+      });
+      track.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+      });
+
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));
       var chips = Array.prototype.slice.call(document.querySelectorAll('.filters button'));
+      // a card left alone on the last row of three spans the row (styled wide on desktop only)
+      function balance() {
+        var shown = cards.filter(function (c) { return !c.hidden; });
+        cards.forEach(function (c) { c.classList.remove('wide'); });
+        if (shown.length % 3 === 1) shown[shown.length - 1].classList.add('wide');
+      }
       chips.forEach(function (b) {
         b.addEventListener('click', function () {
           var f = b.getAttribute('data-filter');
           chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
           cards.forEach(function (c) { c.hidden = f !== 'all' && c.getAttribute('data-group') !== f; });
+          balance();
         });
       });
+      balance();
 
       // ?from=<project id>: mark the project the visitor came from.
       var from = new URLSearchParams(location.search).get('from');
