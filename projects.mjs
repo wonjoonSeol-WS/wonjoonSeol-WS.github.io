@@ -2,7 +2,7 @@
 // `featured` projects have their own website and also appear in the carousel at the top.
 // `warn` is shown above the links when trying it blindly can hurt. `what` may contain [text](https://...) links.
 // `also` is an optional second way to use it ({ label, url }).
-// `try` is where someone can start using it; `code` is the repo.
+// `try` is where someone can start using it; `code` is the repo (leave it out while the repo is private).
 // `deprecated` marks an archived project on its card.
 // Groups are shown in this order, and projects in the order listed.
 const gh = (repo) => `https://github.com/wonjoonSeol-WS/${repo}`;
@@ -70,6 +70,16 @@ export const groups = [
         },
         try: { en: site('subpair'), ko: site('subpair') + 'ko/' },
         code: gh('subpair'),
+      },
+      {
+        id: 'property-simulator',
+        thumb: { en: 'property-simulator.webp' },
+        name: { en: 'Property simulator', ko: '부동산 투자 시뮬레이터' },
+        what: {
+          en: 'Puts the same money into a Korean redevelopment unit, an apartment now, or rent plus the S&P 500, and shows what is left after taxes, loan limits and interest. Korean only.',
+          ko: '같은 돈으로 재개발 입주권, 아파트 매수, 월세 살며 S&P500 적립을 했을 때 세금, 대출 한도, 이자까지 빼고 얼마가 남는지 비교합니다.',
+        },
+        try: { en: 'https://property-simulator-three.vercel.app' },
       },
       {
         id: 'property-times',

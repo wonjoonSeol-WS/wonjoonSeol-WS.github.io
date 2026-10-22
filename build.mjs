@@ -83,11 +83,15 @@ function also(p, lang) {
   return p.also ? `<a class="also" href="${esc(p.also.url)}"${count(`also-${p.id}`)}>${esc(pick(p.also.label, lang))}</a>` : '';
 }
 
+function code(p, lang) {
+  return p.code ? `<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${text[lang].code}</a>` : '';
+}
+
 function links(p, lang) {
   const t = text[lang];
   const tryUrl = pick(p.try, lang);
   const tryLabel = pick(p.tryLabel, lang) ?? t.try;
-  return `<p class="links">${tryUrl ? `<a class="try" href="${esc(tryUrl)}"${count(`try-${p.id}`)}>${esc(tryLabel)}</a>` : ''}${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>`;
+  return `<p class="links">${tryUrl ? `<a class="try" href="${esc(tryUrl)}"${count(`try-${p.id}`)}>${esc(tryLabel)}</a>` : ''}${also(p, lang)}${code(p, lang)}</p>`;
 }
 
 function slide(p, lang, i, n) {
@@ -99,7 +103,7 @@ function slide(p, lang, i, n) {
             <h3 class="slide-name">${esc(pick(p.name, lang))}</h3>
             <p class="what">${rich(pick(p.what, lang))}</p>
           ${warn(p, lang)}
-            <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
+            <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}${code(p, lang)}</p>
           </div>
         </li>`;
 }
