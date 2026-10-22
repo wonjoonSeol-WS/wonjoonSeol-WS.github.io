@@ -32,177 +32,127 @@
       <p class="from-note" hidden></p>
     </section>
 
-    <section class="carousel" aria-roledescription="carousel" aria-labelledby="sites-h">
-      <div class="carousel-head">
-        <h2 id="sites-h">Projects with their own website</h2>
-        <div class="carousel-controls">
-          <button type="button" class="step" data-step="-1" aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <button type="button" class="step" data-step="1" aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
-        </div>
-      </div>
-      <ul class="track" tabindex="0">
-        <li class="slide" id="slide-fitgymlog" aria-roledescription="slide" aria-label="1 / 4: FitGymLog">
-          <a class="slide-shot" href="https://wonjoonseol-ws.github.io/fitgymlog/" tabindex="-1" data-goatcounter-click="slide-fitgymlog"><img class="thumb" src="./assets/thumbs/fitgymlog-en.webp" width="960" height="504" alt=""></a>
-          <div class="slide-text">
-            <h3 class="slide-name">FitGymLog</h3>
-            <p class="what">A workout log you run from a Galaxy Fit band. Press play on the band to finish a set, feel a buzz when rest is over, load the bar by tapping plates.</p>
-          
-            <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/fitgymlog/" data-goatcounter-click="try-fitgymlog">Visit the site</a><a class="code" href="https://github.com/wonjoonSeol-WS/fitgymlog" data-goatcounter-click="code-fitgymlog">Code</a></p>
-          </div>
-        </li>
-        <li class="slide" id="slide-quietbuzz" aria-roledescription="slide" aria-label="2 / 4: QuietBuzz">
-          <a class="slide-shot" href="https://wonjoonseol-ws.github.io/quietbuzz/" tabindex="-1" data-goatcounter-click="slide-quietbuzz"><img class="thumb" src="./assets/thumbs/quietbuzz-en.webp" width="960" height="504" alt="" loading="lazy"></a>
-          <div class="slide-text">
-            <h3 class="slide-name">QuietBuzz</h3>
-            <p class="what">Turn off vibration for every app in one tap, instead of going through them one by one. Only the apps you pick still buzz, and every notification still shows up.</p>
-          
-            <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/quietbuzz/" data-goatcounter-click="try-quietbuzz">Visit the site</a><a class="code" href="https://github.com/wonjoonSeol-WS/quietbuzz" data-goatcounter-click="code-quietbuzz">Code</a></p>
-          </div>
-        </li>
-        <li class="slide" id="slide-subpair" aria-roledescription="slide" aria-label="3 / 4: Subpair">
-          <a class="slide-shot" href="https://wonjoonseol-ws.github.io/subpair/" tabindex="-1" data-goatcounter-click="slide-subpair"><img class="thumb" src="./assets/thumbs/subpair.webp" width="960" height="504" alt="" loading="lazy"></a>
-          <div class="slide-text">
-            <h3 class="slide-name">Subpair</h3>
-            <p class="what">Two subtitle lines at once on Netflix and Jellyfin, with a transcript, line replay and auto-pause. A free, open alternative to <a href="https://www.languagereactor.com/">Language Reactor</a>.</p>
-          
-            <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/subpair/" data-goatcounter-click="try-subpair">Visit the site</a><a class="code" href="https://github.com/wonjoonSeol-WS/subpair" data-goatcounter-click="code-subpair">Code</a></p>
-          </div>
-        </li>
-        <li class="slide" id="slide-dice-roguelife" aria-roledescription="slide" aria-label="4 / 4: Dice Roguelife">
-          <a class="slide-shot" href="https://wonjoonseol-ws.github.io/dice-roguelife/" tabindex="-1" data-goatcounter-click="slide-dice-roguelife"><img class="thumb" src="./assets/thumbs/dice-roguelife-en.webp" width="960" height="504" alt="" loading="lazy"></a>
-          <div class="slide-text">
-            <h3 class="slide-name">Dice Roguelife</h3>
-            <p class="what">A roguelike chat game. Dice roll your world, race and talent, and an AI narrates each life like a web novel. Play it in Claude with no setup, or run it on your computer with your own API key or a local model.</p>
-          
-            <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/dice-roguelife/" data-goatcounter-click="try-dice-roguelife">Play in Claude</a><a class="also" href="https://github.com/wonjoonSeol-WS/dice-roguelife/tree/main/standalone#readme" data-goatcounter-click="also-dice-roguelife">Run it yourself</a><a class="code" href="https://github.com/wonjoonSeol-WS/dice-roguelife" data-goatcounter-click="code-dice-roguelife">Code</a></p>
-          </div>
-        </li>
-      </ul>
-      <nav class="slide-tabs" aria-label="Projects with their own website">
-        <a href="#slide-fitgymlog" aria-current="true">FitGymLog</a>
-        <a href="#slide-quietbuzz">QuietBuzz</a>
-        <a href="#slide-subpair">Subpair</a>
-        <a href="#slide-dice-roguelife">Dice Roguelife</a>
-      </nav>
-    </section>
-
-    <nav class="jump" aria-label="Jump to">
-      <a href="#android">On your Android phone</a>
-      <a href="#browser">In your browser</a>
-      <a href="#games">Games</a>
-      <a href="#claude">Inside Claude</a>
-      <a href="#desktop">On your computer</a>
+    <nav class="filters" aria-label="Show projects for">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="android" aria-pressed="false">Android</button>
+      <button type="button" data-filter="browser" aria-pressed="false">Browser</button>
+      <button type="button" data-filter="games" aria-pressed="false">Games</button>
+      <button type="button" data-filter="claude" aria-pressed="false">Claude</button>
+      <button type="button" data-filter="desktop" aria-pressed="false">Computer</button>
     </nav>
 
-    <section class="group" id="android" aria-labelledby="android-h">
-      <h2 id="android-h">On your Android phone</h2>
-      <ul class="cards">
-        <li class="card" id="fitgymlog" data-name="FitGymLog">
-          <img class="thumb" src="./assets/thumbs/fitgymlog-en.webp" width="960" height="504" alt="" loading="lazy">
+    <ul class="grid">
+        <li class="card" id="fitgymlog" data-group="android" data-name="FitGymLog">
+          <img class="thumb" src="./assets/thumbs/fitgymlog-en.webp" width="960" height="504" alt="">
+          <div class="card-body">
+          <p class="platform">Android</p>
           <h3 class="name">FitGymLog</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">A workout log you run from a Galaxy Fit band. Press play on the band to finish a set, feel a buzz when rest is over, load the bar by tapping plates.</p>
           
           <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/fitgymlog/" data-goatcounter-click="try-fitgymlog">Try it</a><a class="code" href="https://github.com/wonjoonSeol-WS/fitgymlog" data-goatcounter-click="code-fitgymlog">Code</a></p>
+          </div>
         </li>
-        <li class="card" id="quietbuzz" data-name="QuietBuzz">
-          <img class="thumb" src="./assets/thumbs/quietbuzz-en.webp" width="960" height="504" alt="" loading="lazy">
+        <li class="card" id="quietbuzz" data-group="android" data-name="QuietBuzz">
+          <img class="thumb" src="./assets/thumbs/quietbuzz-en.webp" width="960" height="504" alt="">
+          <div class="card-body">
+          <p class="platform">Android</p>
           <h3 class="name">QuietBuzz</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Turn off vibration for every app in one tap, instead of going through them one by one. Only the apps you pick still buzz, and every notification still shows up.</p>
           
           <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/quietbuzz/" data-goatcounter-click="try-quietbuzz">Try it</a><a class="code" href="https://github.com/wonjoonSeol-WS/quietbuzz" data-goatcounter-click="code-quietbuzz">Code</a></p>
+          </div>
         </li>
-        <li class="card" id="morphe-patches" data-name="KakaoTalk patches for Morphe">
-          <img class="thumb" src="./assets/thumbs/morphe-patches.webp" width="960" height="504" alt="" loading="lazy">
+        <li class="card" id="morphe-patches" data-group="android" data-name="KakaoTalk patches for Morphe">
+          <img class="thumb" src="./assets/thumbs/morphe-patches.webp" width="960" height="504" alt="">
+          <div class="card-body">
+          <p class="platform">Android</p>
           <h3 class="name">KakaoTalk patches for Morphe</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Four Morphe patches for KakaoTalk: block KakaoPay on the patched app, remove the Friends tab feed and banner ads without leaving blank slots, and choose how many OpenChat rooms show before &quot;more&quot;. Runs alongside other KakaoTalk patch sources.</p>
           <p class="warn" role="note">Warning: read the README before you patch. Skipping its steps can get your KakaoTalk account banned.</p>
           <p class="links"><a class="try" href="https://github.com/wonjoonSeol-WS/morphe-patches#readme" data-goatcounter-click="try-morphe-patches">Read the guide first</a><a class="code" href="https://github.com/wonjoonSeol-WS/morphe-patches" data-goatcounter-click="code-morphe-patches">Code</a></p>
+          </div>
         </li>
-      </ul>
-    </section>
-
-    <section class="group" id="browser" aria-labelledby="browser-h">
-      <h2 id="browser-h">In your browser</h2>
-      <ul class="cards">
-        <li class="card" id="subpair" data-name="Subpair">
-          <img class="thumb" src="./assets/thumbs/subpair.webp" width="960" height="504" alt="" loading="lazy">
+        <li class="card" id="subpair" data-group="browser" data-name="Subpair">
+          <img class="thumb" src="./assets/thumbs/subpair.webp" width="960" height="504" alt="">
+          <div class="card-body">
+          <p class="platform">Browser</p>
           <h3 class="name">Subpair</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Two subtitle lines at once on Netflix and Jellyfin, with a transcript, line replay and auto-pause. A free, open alternative to <a href="https://www.languagereactor.com/">Language Reactor</a>.</p>
           
           <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/subpair/" data-goatcounter-click="try-subpair">Try it</a><a class="code" href="https://github.com/wonjoonSeol-WS/subpair" data-goatcounter-click="code-subpair">Code</a></p>
+          </div>
         </li>
-      </ul>
-    </section>
-
-    <section class="group" id="games" aria-labelledby="games-h">
-      <h2 id="games-h">Games</h2>
-      <ul class="cards">
-        <li class="card" id="dice-roguelife" data-name="Dice Roguelife">
+        <li class="card" id="dice-roguelife" data-group="games" data-name="Dice Roguelife">
           <img class="thumb" src="./assets/thumbs/dice-roguelife-en.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Games</p>
           <h3 class="name">Dice Roguelife</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">A roguelike chat game. Dice roll your world, race and talent, and an AI narrates each life like a web novel. Play it in Claude with no setup, or run it on your computer with your own API key or a local model.</p>
           
           <p class="links"><a class="try" href="https://wonjoonseol-ws.github.io/dice-roguelife/" data-goatcounter-click="try-dice-roguelife">Play in Claude</a><a class="also" href="https://github.com/wonjoonSeol-WS/dice-roguelife/tree/main/standalone#readme" data-goatcounter-click="also-dice-roguelife">Run it yourself</a><a class="code" href="https://github.com/wonjoonSeol-WS/dice-roguelife" data-goatcounter-click="code-dice-roguelife">Code</a></p>
+          </div>
         </li>
-      </ul>
-    </section>
-
-    <section class="group" id="claude" aria-labelledby="claude-h">
-      <h2 id="claude-h">Inside Claude</h2>
-      <ul class="cards">
-        <li class="card" id="language-mistake-tracker" data-name="Language mistake tracker">
+        <li class="card" id="language-mistake-tracker" data-group="claude" data-name="Language mistake tracker">
           <img class="thumb" src="./assets/thumbs/language-mistake-tracker.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Claude</p>
           <h3 class="name">Language mistake tracker</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Turns the corrections Claude gives you in chat into a review sheet: your most common mistakes, repeated habits and rules with memory tricks.</p>
           
           <p class="links"><a class="try" href="https://github.com/wonjoonSeol-WS/language-mistake-tracker#install-and-update-in-the-claude-app-phones-too" data-goatcounter-click="try-language-mistake-tracker">Install</a><a class="code" href="https://github.com/wonjoonSeol-WS/language-mistake-tracker" data-goatcounter-click="code-language-mistake-tracker">Code</a></p>
+          </div>
         </li>
-        <li class="card" id="claude-side-insights" data-name="Side Insights">
+        <li class="card" id="claude-side-insights" data-group="claude" data-name="Side Insights">
           <img class="thumb" src="./assets/thumbs/claude-side-insights.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Claude</p>
           <h3 class="name">Side Insights</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">A side panel for Claude Code. Checks every question got answered, walks through the logic of changed code, and shows tool calls live.</p>
           
           <p class="links"><a class="try" href="https://github.com/wonjoonSeol-WS/claude-side-insights#install" data-goatcounter-click="try-claude-side-insights">Install</a><a class="code" href="https://github.com/wonjoonSeol-WS/claude-side-insights" data-goatcounter-click="code-claude-side-insights">Code</a></p>
+          </div>
         </li>
-      </ul>
-    </section>
-
-    <section class="group" id="desktop" aria-labelledby="desktop-h">
-      <h2 id="desktop-h">On your computer</h2>
-      <ul class="cards">
-        <li class="card" id="nanazip-auto-encoding" data-name="NanaZip auto encoding">
+        <li class="card" id="nanazip-auto-encoding" data-group="desktop" data-name="NanaZip auto encoding">
           <img class="thumb" src="./assets/thumbs/nanazip-auto-encoding.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Computer</p>
           <h3 class="name">NanaZip auto encoding</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Windows right-click menus that extract with NanaZip and pick the file name encoding for you, so Japanese ZIPs stop coming out garbled.</p>
           
           <p class="links"><a class="try" href="https://github.com/wonjoonSeol-WS/nanazip-auto-encoding" data-goatcounter-click="try-nanazip-auto-encoding">Install</a><a class="code" href="https://github.com/wonjoonSeol-WS/nanazip-auto-encoding" data-goatcounter-click="code-nanazip-auto-encoding">Code</a></p>
+          </div>
         </li>
-        <li class="card" id="subsync-repair" data-name="subsync-repair">
+        <li class="card" id="subsync-repair" data-group="desktop" data-name="subsync-repair">
           <img class="thumb" src="./assets/thumbs/subsync-repair-en.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Computer</p>
           <h3 class="name">subsync-repair</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Fixes subtitles whose timing drifts in pieces by aligning them to a subtitle in another language. Command line, Bazarr hook, and a local server.</p>
           
           <p class="links"><a class="code" href="https://github.com/wonjoonSeol-WS/subsync-repair" data-goatcounter-click="code-subsync-repair">Code</a></p>
+          </div>
         </li>
-        <li class="card" id="otpauth-to-2fas" data-name="otpauth-to-2fas">
+        <li class="card" id="otpauth-to-2fas" data-group="desktop" data-name="otpauth-to-2fas">
           <img class="thumb" src="./assets/thumbs/otpauth-to-2fas-en.webp" width="960" height="504" alt="" loading="lazy">
+          <div class="card-body">
+          <p class="platform">Computer</p>
           <h3 class="name">otpauth-to-2fas</h3>
           <p class="here-note">You came from this one</p>
           <p class="what">Moves your codes from OTP Auth on iOS to 2FAS or Aegis in one step, by decrypting the backup into an Aegis vault. No QR codes one by one.</p>
           
           <p class="links"><a class="code" href="https://github.com/wonjoonSeol-WS/otpauth-to-2fas" data-goatcounter-click="code-otpauth-to-2fas">Code</a></p>
+          </div>
         </li>
-      </ul>
-    </section>
+    </ul>
   </main>
 
   <footer class="bottom wrap">
@@ -212,33 +162,15 @@
 
   <script>
     (function () {
-      // Carousel: buttons and tabs scroll the track; the tab for the slide in view is marked current.
-      var track = document.querySelector('.track');
-      var slides = Array.prototype.slice.call(track.children);
-      var tabs = Array.prototype.slice.call(document.querySelectorAll('.slide-tabs a'));
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      function current() { return Math.round(track.scrollLeft / track.clientWidth); }
-      function go(i) {
-        i = (i + slides.length) % slides.length;
-        track.scrollTo({ left: i * track.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
-      }
-      document.querySelectorAll('.step').forEach(function (b) {
-        b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
-      });
-      tabs.forEach(function (a, i) {
-        a.addEventListener('click', function (e) { e.preventDefault(); go(i); });
-      });
-      var tick;
-      track.addEventListener('scroll', function () {
-        clearTimeout(tick);
-        tick = setTimeout(function () {
-          var c = current();
-          tabs.forEach(function (a, i) { if (i === c) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
-        }, 60);
-      });
-      track.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
-        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+      // Filter chips: show only the projects for one platform (everything is visible without script).
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));
+      var chips = Array.prototype.slice.call(document.querySelectorAll('.filters button'));
+      chips.forEach(function (b) {
+        b.addEventListener('click', function () {
+          var f = b.getAttribute('data-filter');
+          chips.forEach(function (c) { c.setAttribute('aria-pressed', String(c === b)); });
+          cards.forEach(function (c) { c.hidden = f !== 'all' && c.getAttribute('data-group') !== f; });
+        });
       });
 
       // ?from=<project id>: mark the project the visitor came from.
