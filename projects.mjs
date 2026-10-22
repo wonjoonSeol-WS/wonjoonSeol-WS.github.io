@@ -83,7 +83,6 @@ export const groups = [
       },
       {
         id: 'property-simulator',
-        license: 'MIT',
         thumb: { en: 'property-simulator.webp' },
         name: { en: 'Property simulator', ko: '부동산 투자 시뮬레이터', ja: '不動産投資シミュレーター' },
         what: {

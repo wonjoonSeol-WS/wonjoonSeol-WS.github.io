@@ -72,6 +72,7 @@ const text = {
     try: '試してみる',
     code: 'コード',
     deprecated: '開発終了',
+    license: 'ライセンス',
     fromNote: (name) => `${name}から来られたんですね。ほかのプロジェクトもどうぞ。`,
     here: 'ここから来られました',
     footer: 'すべて無料のオープンソースです。バグを見つけたら、そのプロジェクトにIssueを立ててください。',
