@@ -6,8 +6,8 @@
 // `deprecated` marks an archived project on its card.
 // `license` is the SPDX id from the repo LICENSE, shown on the card.
 // Groups are shown in this order, and projects in the order listed.
-const gh = (repo) => `https://github.com/wonjoonSeol-WS/${repo}`;
-const site = (repo) => `https://wonjoonseol-ws.github.io/${repo}/`;
+const gh = (repo) => `https://github.com/wonjoonSeol/${repo}`;
+const site = (repo) => `https://wonjoonseol.github.io/${repo}/`;
 
 export const groups = [
   {

@@ -3,7 +3,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { groups } from './projects.mjs';
 
-const ORIGIN = 'https://wonjoonseol-ws.github.io/';
+const ORIGIN = 'https://wonjoonseol.github.io/';
 // GoatCounter site code (the name before .goatcounter.com); empty means no counter.
 const GOATCOUNTER = 'wonjoonseol';
 
@@ -181,7 +181,7 @@ function page(lang) {
 </head>
 <body>
   <header class="top wrap">
-    <a class="by" href="https://github.com/wonjoonSeol-WS">${t.by}</a>
+    <a class="by" href="https://github.com/wonjoonSeol">${t.by}</a>
     <nav class="languages" aria-label="Language">
       ${t.langs.map(([l, href, label, cur]) => `<a href="${href}" lang="${l}"${cur ? ' aria-current="true"' : ''}>${label}</a>`).join('\n      ')}
     </nav>
@@ -220,7 +220,7 @@ function page(lang) {
 
   <footer class="bottom wrap">
     <p>${t.footer}</p>
-    <a href="https://github.com/wonjoonSeol-WS?tab=repositories">${t.all}</a>
+    <a href="https://github.com/wonjoonSeol?tab=repositories">${t.all}</a>
   </footer>
 
   <script>
