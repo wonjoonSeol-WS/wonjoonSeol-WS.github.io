@@ -9,6 +9,8 @@
   --note-ink: #1e2b2a;
   --tile: #1e2b2a;
   --tile-ink: #edf0ee;
+  --danger: #c2410c;
+  --danger-soft: #fbe7dc;
   --display: "Bricolage Grotesque", "Pretendard Variable", system-ui, sans-serif;
   --body: "Instrument Sans", "Pretendard Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -23,6 +25,8 @@
     --note-ink: #141a1a;
     --tile: #223030;
     --tile-ink: #e6ecea;
+    --danger: #fb923c;
+    --danger-soft: #3a2418;
   }
 }
 
@@ -174,3 +178,6 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
   .slide-tabs { gap: 4px 16px; font-size: 15px; }
   .jump { margin-top: 48px; }
 }
+
+/* a caution shown before the links, for projects that can do harm if tried blindly */
+.warn { margin: 0; padding: 8px 12px; border-left: 3px solid var(--danger); background: var(--danger-soft); color: var(--ink); font-size: 15px; font-weight: 500; border-radius: 0 4px 4px 0; }

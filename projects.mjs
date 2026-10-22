@@ -1,5 +1,6 @@
 // One entry per project. `thumb` is a file in assets/thumbs (960x504); projects without one get a type-only tile.
 // `featured` projects have their own website and also appear in the carousel at the top.
+// `warn` is shown above the links when trying it blindly can hurt. `what` may contain [text](https://...) links.
 // `also` is an optional second way to use it ({ label, url }).
 // `try` is where someone can start using it; `code` is the repo.
 // Groups are shown in this order, and projects in the order listed.
@@ -43,8 +44,12 @@ export const groups = [
           en: 'A Morphe patch bundle for KakaoTalk: turns off KakaoPay on a patched app and removes the ad slots other patch sources leave behind.',
           ko: '카카오톡용 Morphe 패치 묶음. 패치한 앱에서 카카오페이를 끄고, 다른 패치가 남겨 둔 광고 자리를 지웁니다.',
         },
-        try: { en: 'https://morphe.software/add-source?github=wonjoonSeol-WS/morphe-patches' },
-        tryLabel: { en: 'Add to Morphe', ko: 'Morphe에 추가' },
+        warn: {
+          en: 'Warning: read the README before you patch. Skipping its steps can get your KakaoTalk account banned.',
+          ko: '주의: README를 꼭 읽고 따라 하세요. 그렇지 않으면 계정이 차단될 수 있습니다.',
+        },
+        try: { en: gh('morphe-patches') + '#readme' },
+        tryLabel: { en: 'Read the guide first', ko: '가이드부터 읽기' },
         code: gh('morphe-patches'),
       },
     ],
@@ -59,8 +64,8 @@ export const groups = [
         thumb: { en: 'subpair.webp' },
         name: 'Subpair',
         what: {
-          en: 'Two subtitle lines at once on Netflix and Jellyfin, with a transcript, line replay and auto-pause. A free, open alternative to Language Reactor.',
-          ko: '넷플릭스와 젤리핀에서 자막 두 줄을 동시에. 대본, 한 줄 다시 듣기, 자동 일시정지까지. 무료 오픈소스 Language Reactor 대안입니다.',
+          en: 'Two subtitle lines at once on Netflix and Jellyfin, with a transcript, line replay and auto-pause. A free, open alternative to [Language Reactor](https://www.languagereactor.com/).',
+          ko: '넷플릭스와 젤리핀에서 자막 두 줄을 동시에. 대본, 한 줄 다시 듣기, 자동 일시정지까지. 무료 오픈소스 [Language Reactor](https://www.languagereactor.com/) 대안입니다.',
         },
         try: { en: site('subpair'), ko: site('subpair') + 'ko/' },
         code: gh('subpair'),
@@ -74,7 +79,7 @@ export const groups = [
       {
         id: 'dice-roguelife',
         featured: true,
-        thumb: { en: 'dice-roguelife.webp' },
+        thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp' },
         name: 'Dice Roguelife',
         what: {
           en: 'A roguelike chat game. Dice roll your world, race and talent, and an AI narrates each life like a web novel. Play it in Claude with no setup, or run it on your computer with your own API key or a local model.',
@@ -138,6 +143,7 @@ export const groups = [
       },
       {
         id: 'subsync-repair',
+        thumb: { en: 'subsync-repair-en.webp', ko: 'subsync-repair-ko.webp' },
         name: 'subsync-repair',
         what: {
           en: 'Fixes subtitles whose timing drifts in pieces by aligning them to a subtitle in another language. Command line, Bazarr hook, and a local server.',
@@ -147,6 +153,7 @@ export const groups = [
       },
       {
         id: 'otpauth-to-2fas',
+        thumb: { en: 'otpauth-to-2fas-en.webp', ko: 'otpauth-to-2fas-ko.webp' },
         name: 'otpauth-to-2fas',
         what: {
           en: 'Moves your codes from OTP Auth on iOS to 2FAS or Aegis in one step, by decrypting the backup into an Aegis vault. No QR codes one by one.',

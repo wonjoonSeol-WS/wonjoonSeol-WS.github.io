@@ -52,6 +52,9 @@ const text = {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const pick = (obj, lang) => (obj ? obj[lang] ?? obj.en : undefined);
+// Escapes text, then turns [label](https://url) into links.
+const rich = (s) => esc(s).replace(/\[([^\]]+)\]\((https:[^)\s]+)\)/g, (_, label, url) => `<a href="${url}">${label}</a>`);
+const warn = (p, lang) => (p.warn ? `<p class="warn" role="note">${esc(pick(p.warn, lang))}</p>` : '');
 const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '');
 
 function thumb(p, lang, eager = false) {
@@ -78,7 +81,8 @@ function slide(p, lang, i, n) {
           <a class="slide-shot" href="${esc(pick(p.try, lang))}" tabindex="-1"${count(`slide-${p.id}`)}>${thumb(p, lang, i === 0)}</a>
           <div class="slide-text">
             <h3 class="slide-name">${esc(p.name)}</h3>
-            <p class="what">${esc(pick(p.what, lang))}</p>
+            <p class="what">${rich(pick(p.what, lang))}</p>
+          ${warn(p, lang)}
             <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
           </div>
         </li>`;
@@ -91,7 +95,8 @@ function card(p, lang) {
           ${thumb(p, lang)}
           <h3 class="name">${esc(p.name)}</h3>
           <p class="here-note">${t.here}</p>
-          <p class="what">${esc(pick(p.what, lang))}</p>
+          <p class="what">${rich(pick(p.what, lang))}</p>
+          ${warn(p, lang)}
           ${links(p, lang)}
         </li>`;
 }
