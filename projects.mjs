@@ -39,10 +39,10 @@ export const groups = [
       {
         id: 'morphe-patches',
         thumb: { en: 'morphe-patches.webp' },
-        name: 'Block KakaoPay',
+        name: { en: 'KakaoTalk patches for Morphe', ko: '카카오톡 Morphe 패치' },
         what: {
-          en: 'A Morphe patch bundle for KakaoTalk: turns off KakaoPay on a patched app and removes the ad slots other patch sources leave behind.',
-          ko: '카카오톡용 Morphe 패치 묶음. 패치한 앱에서 카카오페이를 끄고, 다른 패치가 남겨 둔 광고 자리를 지웁니다.',
+          en: 'Four Morphe patches for KakaoTalk: block KakaoPay on the patched app, remove the Friends tab feed and banner ads without leaving blank slots, and choose how many OpenChat rooms show before "more". Runs alongside other KakaoTalk patch sources.',
+          ko: '카카오톡용 Morphe 패치 4종: 패치한 앱에서 카카오페이 차단, 친구 탭 소식 광고와 배너 광고를 빈자리 없이 제거, 오픈채팅 목록이 접힌 상태에서 보일 방 개수 설정. 다른 카카오톡 패치 소스와 함께 써요.',
         },
         warn: {
           en: 'Warning: read the README before you patch. Skipping its steps can get your KakaoTalk account banned.',

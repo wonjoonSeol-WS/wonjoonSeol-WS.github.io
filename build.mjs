@@ -51,7 +51,7 @@ const text = {
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const pick = (obj, lang) => (obj ? obj[lang] ?? obj.en : undefined);
+const pick = (obj, lang) => (typeof obj === 'string' ? obj : obj ? obj[lang] ?? obj.en : undefined);
 // Escapes text, then turns [label](https://url) into links.
 const rich = (s) => esc(s).replace(/\[([^\]]+)\]\((https:[^)\s]+)\)/g, (_, label, url) => `<a href="${url}">${label}</a>`);
 const warn = (p, lang) => (p.warn ? `<p class="warn" role="note">${esc(pick(p.warn, lang))}</p>` : '');
@@ -59,7 +59,7 @@ const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '')
 
 function thumb(p, lang, eager = false) {
   const file = pick(p.thumb, lang);
-  if (!file) return `<div class="thumb thumb-type" aria-hidden="true"><span>${esc(p.name)}</span></div>`;
+  if (!file) return `<div class="thumb thumb-type" aria-hidden="true"><span>${esc(pick(p.name, lang))}</span></div>`;
   return `<img class="thumb" src="${text[lang].root}assets/thumbs/${file}" width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}>`;
 }
 
@@ -77,10 +77,10 @@ function links(p, lang) {
 function slide(p, lang, i, n) {
   const t = text[lang];
   return `
-        <li class="slide" id="slide-${p.id}" aria-roledescription="slide" aria-label="${i + 1} / ${n}: ${esc(p.name)}">
+        <li class="slide" id="slide-${p.id}" aria-roledescription="slide" aria-label="${i + 1} / ${n}: ${esc(pick(p.name, lang))}">
           <a class="slide-shot" href="${esc(pick(p.try, lang))}" tabindex="-1"${count(`slide-${p.id}`)}>${thumb(p, lang, i === 0)}</a>
           <div class="slide-text">
-            <h3 class="slide-name">${esc(p.name)}</h3>
+            <h3 class="slide-name">${esc(pick(p.name, lang))}</h3>
             <p class="what">${rich(pick(p.what, lang))}</p>
           ${warn(p, lang)}
             <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
@@ -91,9 +91,9 @@ function slide(p, lang, i, n) {
 function card(p, lang) {
   const t = text[lang];
   return `
-        <li class="card" id="${p.id}" data-name="${esc(p.name)}">
+        <li class="card" id="${p.id}" data-name="${esc(pick(p.name, lang))}">
           ${thumb(p, lang)}
-          <h3 class="name">${esc(p.name)}</h3>
+          <h3 class="name">${esc(pick(p.name, lang))}</h3>
           <p class="here-note">${t.here}</p>
           <p class="what">${rich(pick(p.what, lang))}</p>
           ${warn(p, lang)}
@@ -149,7 +149,7 @@ function page(lang) {
       <ul class="track" tabindex="0">${featured.map((p, i) => slide(p, lang, i, featured.length)).join('')}
       </ul>
       <nav class="slide-tabs" aria-label="${t.sites}">
-        ${featured.map((p, i) => `<a href="#slide-${p.id}"${i === 0 ? ' aria-current="true"' : ''}>${esc(p.name)}</a>`).join('\n        ')}
+        ${featured.map((p, i) => `<a href="#slide-${p.id}"${i === 0 ? ' aria-current="true"' : ''}>${esc(pick(p.name, lang))}</a>`).join('\n        ')}
       </nav>
     </section>
 
