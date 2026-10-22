@@ -142,28 +142,4 @@ export const groups = [
       },
     ],
   },
-  {
-    id: 'agents',
-    name: { en: 'For teams running AI agents', ko: 'AI 에이전트를 돌리는 팀용' },
-    projects: [
-      {
-        id: 'agentic-harness',
-        name: 'Agentic Harness',
-        what: {
-          en: 'Label a GitHub issue and an agent plans, builds, reviews and opens the PR. Your CI and a human review stay as the gate.',
-          ko: 'GitHub 이슈에 라벨을 달면 에이전트가 계획, 구현, 리뷰 후 PR을 엽니다. CI와 사람의 리뷰가 마지막 관문입니다.',
-        },
-        code: gh('agentic-harness'),
-      },
-      {
-        id: 'agentic-sentinel',
-        name: 'Agentic Sentinel',
-        what: {
-          en: 'Watches your Slack alert channel, has Claude look for the root cause, and posts what it found in the alert thread.',
-          ko: 'Slack 알림 채널을 지켜보다가 Claude가 원인을 찾아 알림 스레드에 결과를 남깁니다.',
-        },
-        code: gh('agentic-sentinel'),
-      },
-    ],
-  },
 ];
