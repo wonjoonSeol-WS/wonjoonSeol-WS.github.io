@@ -70,9 +70,10 @@ h1 {
 }
 h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing: -.03em; }
 .lead { font-size: 1.05rem; color: var(--muted); max-width: 44rem; margin: 0; text-wrap: pretty; }
-/* justified text: hyphenate English so the spacing stays even; Korean keeps whole words */
+/* justified text: hyphenate English so the spacing stays even. Korean keeps whole words, which leaves
+   wide gaps when justified, so it stays left-aligned */
 .lead, .card .what, .slide-text .what { text-align: justify; hyphens: auto; }
-:lang(ko) .lead, :lang(ko) .card .what, :lang(ko) .slide-text .what { hyphens: manual; }
+:lang(ko) .lead, :lang(ko) .card .what, :lang(ko) .slide-text .what { text-align: start; hyphens: manual; }
 .from-note {
   display: inline-block;
   background: var(--note);
@@ -165,6 +166,7 @@ h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing
 .card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .platform { margin: 0; font-size: 13px; font-weight: 600; color: var(--muted); }
 .platform .deprecated { margin-left: 8px; color: var(--danger); }
+.platform .license { margin-left: 8px; padding: 0 5px; border: 1px solid var(--line); border-radius: 4px; font-weight: 500; }
 .name {
   font-family: var(--display);
   font-variation-settings: "wdth" 80;

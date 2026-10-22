@@ -4,6 +4,7 @@
 // `also` is an optional second way to use it ({ label, url }).
 // `try` is where someone can start using it; `code` is the repo (leave it out while the repo is private).
 // `deprecated` marks an archived project on its card.
+// `license` is the SPDX id from the repo LICENSE, shown on the card.
 // Groups are shown in this order, and projects in the order listed.
 const gh = (repo) => `https://github.com/wonjoonSeol-WS/${repo}`;
 const site = (repo) => `https://wonjoonseol-ws.github.io/${repo}/`;
@@ -15,6 +16,7 @@ export const groups = [
     projects: [
       {
         id: 'fitgymlog',
+        license: 'MIT',
         featured: true,
         thumb: { en: 'fitgymlog-en.webp', ko: 'fitgymlog-ko.webp' },
         name: 'FitGymLog',
@@ -27,6 +29,7 @@ export const groups = [
       },
       {
         id: 'quietbuzz',
+        license: 'MIT',
         featured: true,
         thumb: { en: 'quietbuzz-en.webp', ko: 'quietbuzz-ko.webp' },
         name: 'QuietBuzz',
@@ -39,6 +42,7 @@ export const groups = [
       },
       {
         id: 'morphe-patches',
+        license: 'GPL-3.0',
         thumb: { en: 'morphe-patches.webp' },
         name: { en: 'KakaoTalk patches for Morphe', ko: '카카오톡 Morphe 패치' },
         what: {
@@ -61,6 +65,7 @@ export const groups = [
     projects: [
       {
         id: 'subpair',
+        license: 'MIT',
         featured: true,
         thumb: { en: 'subpair.webp' },
         name: 'Subpair',
@@ -73,6 +78,7 @@ export const groups = [
       },
       {
         id: 'property-simulator',
+        license: 'MIT',
         thumb: { en: 'property-simulator.webp' },
         name: { en: 'Property simulator', ko: '부동산 투자 시뮬레이터' },
         what: {
@@ -83,6 +89,7 @@ export const groups = [
       },
       {
         id: 'property-times',
+        license: 'MIT',
         deprecated: true,
         thumb: { en: 'property-times.webp' },
         name: { en: 'Property Times', ko: '부동산 Times' },
@@ -100,6 +107,7 @@ export const groups = [
     projects: [
       {
         id: 'dice-roguelife',
+        license: 'MIT',
         featured: true,
         thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp' },
         name: 'Dice Roguelife',
@@ -123,6 +131,7 @@ export const groups = [
     projects: [
       {
         id: 'language-mistake-tracker',
+        license: 'MIT',
         thumb: { en: 'language-mistake-tracker.webp' },
         name: 'Language mistake tracker',
         what: {
@@ -135,6 +144,7 @@ export const groups = [
       },
       {
         id: 'claude-side-insights',
+        license: 'MIT',
         thumb: { en: 'claude-side-insights.webp' },
         name: 'Side Insights',
         what: {
@@ -153,6 +163,7 @@ export const groups = [
     projects: [
       {
         id: 'nanazip-auto-encoding',
+        license: 'MIT',
         thumb: { en: 'nanazip-auto-encoding.webp' },
         name: 'NanaZip auto encoding',
         what: {
@@ -165,6 +176,7 @@ export const groups = [
       },
       {
         id: 'subsync-repair',
+        license: 'MIT',
         thumb: { en: 'subsync-repair-en.webp', ko: 'subsync-repair-ko.webp' },
         name: 'subsync-repair',
         what: {
@@ -181,6 +193,7 @@ export const groups = [
     projects: [
       {
         id: 'otpauth-to-2fas',
+        license: 'GPL-3.0',
         thumb: { en: 'otpauth-to-2fas-en.webp', ko: 'otpauth-to-2fas-ko.webp' },
         name: 'otpauth-to-2fas',
         what: {

@@ -9,8 +9,8 @@ const GOATCOUNTER = 'wonjoonseol';
 
 const text = {
   en: {
-    title: 'Wonjoon Seol: open source',
-    description: 'Small open source tools by Wonjoon Seol: Android apps, a subtitle extension, Claude add-ons and Windows utilities.',
+    title: 'Wonjoon Seol: projects',
+    description: 'Small projects by Wonjoon Seol: Android apps, a subtitle extension, a property simulator, a game, Claude add-ons and Windows utilities.',
     h1: 'Small tools, free to try.',
     lead: 'Things I built for my own problems and put on GitHub. Some are polished, some are slop. Pick one by where you would use it.',
     by: 'Wonjoon Seol on GitHub',
@@ -24,16 +24,17 @@ const text = {
     try: 'Try it',
     code: 'Code',
     deprecated: 'Deprecated',
+    license: 'License',
     fromNote: (name) => `You came from ${name}. Here is everything else.`,
     here: 'You came from this one',
-    footer: 'Everything is free and open source. Found a bug? Open an issue on that project.',
+    footer: 'Everything is free to use, and each card shows its license. Found a bug? Open an issue on that project.',
     all: 'All repositories on GitHub',
     langs: [['en', './', 'EN', true], ['ko', 'ko/', '한국어', false]],
     root: './',
   },
   ko: {
-    title: 'Wonjoon Seol: 오픈소스',
-    description: 'Wonjoon Seol이 만든 작은 오픈소스 도구 모음: 안드로이드 앱, 자막 확장 프로그램, Claude 애드온, 윈도우 도구.',
+    title: 'Wonjoon Seol: 프로젝트',
+    description: 'Wonjoon Seol이 만든 작은 프로젝트 모음: 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구.',
     h1: '작은 도구들, 마음껏 써 보세요.',
     lead: '제 불편을 풀려고 만든 것들을 GitHub에 올려 두었습니다. 잘 다듬은 것도, 대충 만든 것도 있어요. 어디서 쓸지로 골라 보세요.',
     by: 'GitHub의 Wonjoon Seol',
@@ -47,9 +48,10 @@ const text = {
     try: '써 보기',
     code: '코드',
     deprecated: '지원 종료',
+    license: '라이선스',
     fromNote: (name) => `${name}에서 오셨네요. 나머지 프로젝트도 둘러보세요.`,
     here: '여기서 오셨어요',
-    footer: '모두 무료 오픈소스입니다. 버그를 찾으면 해당 프로젝트에 이슈를 남겨 주세요.',
+    footer: '모두 무료이고, 라이선스는 카드마다 적혀 있습니다. 버그를 찾으면 해당 프로젝트에 이슈를 남겨 주세요.',
     all: 'GitHub의 전체 저장소',
     langs: [['en', '../', 'EN', false], ['ko', './', '한국어', true]],
     root: '../',
@@ -114,7 +116,7 @@ function card(p, g, lang, i) {
         <li class="card" id="${p.id}" data-group="${g.id}" data-name="${esc(pick(p.name, lang))}">
           ${thumb(p, lang, i < 4)}
           <div class="card-body">
-          <p class="platform">${esc(pick(SHORT[g.id], lang))}${p.deprecated ? `<span class="deprecated">${t.deprecated}</span>` : ''}</p>
+          <p class="platform">${esc(pick(SHORT[g.id], lang))}${p.deprecated ? `<span class="deprecated">${t.deprecated}</span>` : ''}${p.license ? `<span class="license" title="${t.license}">${esc(p.license)}</span>` : ''}</p>
           <h3 class="name">${esc(pick(p.name, lang))}</h3>
           <p class="here-note">${t.here}</p>
           <p class="what">${rich(pick(p.what, lang))}</p>
