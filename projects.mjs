@@ -41,8 +41,8 @@ export const groups = [
         thumb: { en: 'morphe-patches.webp' },
         name: { en: 'KakaoTalk patches for Morphe', ko: '카카오톡 Morphe 패치' },
         what: {
-          en: 'Assorted KakaoTalk patches for Morphe, made from the decompiled app. Use them alongside other KakaoTalk patch sources.',
-          ko: '디컴파일한 앱을 바탕으로 만든 카카오톡용 Morphe 패치 모음. 다른 카카오톡 패치 소스와 함께 써요.',
+          en: 'Assorted KakaoTalk patches for Morphe, made from the decompiled app.',
+          ko: '디컴파일한 앱을 바탕으로 만든 카카오톡용 Morphe 패치 모음.',
         },
         warn: {
           en: 'Warning: read the README before you patch. Skipping its steps can get your KakaoTalk account banned.',
