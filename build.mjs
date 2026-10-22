@@ -36,7 +36,7 @@ const text = {
     title: 'Wonjoon Seol: 프로젝트',
     description: 'Wonjoon Seol이 만든 작은 프로젝트를 모아 뒀어요. 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구가 있어요.',
     h1: '작은 도구들, 마음껏 써 보세요.',
-    lead: '제가 불편해서 만든 것들을 GitHub에 올려 뒀어요. 잘 다듬은 것도, 대충 만든 것도 있어요. 어디서 쓸지 골라 보세요.',
+    lead: '제가 불편해서 직접 만든 것들이에요. 잘 다듬은 것도, 대충 만든 것도 있어요. 쓰는 곳별로 나눠 뒀어요.',
     by: 'GitHub의 Wonjoon Seol',
     sites: '웹사이트가 있는 프로젝트',
     prev: '이전 프로젝트',
@@ -103,6 +103,8 @@ const pick = (obj, lang) => (typeof obj === 'string' ? obj : obj ? obj[lang] ?? 
 // Escapes text, then turns [label](https://url) into links.
 const rich = (s) => esc(s).replace(/\[([^\]]+)\]\((https:[^)\s]+)\)/g, (_, label, url) => `<a href="${url}">${label}</a>`);
 const warn = (p, lang) => (p.warn ? `<p class="warn" role="note">${esc(pick(p.warn, lang))}</p>` : '');
+// Korean wraps only at spaces, so a long lead can leave a dangling phrase; keep each sentence whole when it fits
+const sentences = (s) => s.split(/(?<=[.?!])\s+/).map((x) => `<span class="sentence">${x}</span>`).join(' ');
 const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '');
 
 function thumb(p, lang, eager = false) {
@@ -188,7 +190,7 @@ function page(lang) {
   <main class="wrap">
     <section class="intro">
       <h1>${t.h1}</h1>
-      <p class="lead">${t.lead}</p>
+      <p class="lead">${lang === 'ko' ? sentences(t.lead) : t.lead}</p>
       <p class="from-note" hidden></p>
     </section>
 

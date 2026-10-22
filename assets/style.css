@@ -74,6 +74,7 @@ h1 {
 }
 h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; letter-spacing: -.03em; }
 .lead { font-size: 1.05rem; color: var(--muted); max-width: 44rem; margin: 0; text-wrap: pretty; }
+.lead .sentence { display: inline-block; }
 /* justified text: hyphenate English so the spacing stays even. Korean keeps whole words, which leaves
    wide gaps when justified, so it stays left-aligned. Japanese has no spaces, so it justifies evenly without hyphens */
 .lead, .card .what, .slide-text .what { text-align: justify; hyphens: auto; }
