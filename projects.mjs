@@ -94,8 +94,8 @@ export const groups = [
         thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp' },
         name: 'Dice Roguelife',
         what: {
-          en: 'Open-source alternative to [Crack](https://crack.wrtn.ai/), the Korean AI character chat app: a roguelike AI chat game you play on your Claude subscription.',
-          ko: '오픈소스 [크랙AI](https://crack.wrtn.ai/) - 구독제로 즐기는 로그라이크 AI 채팅 게임',
+          en: 'Open-source alternative to [Crack](https://crack.wrtn.ai/), the Korean AI character chat app: a roguelike AI chat game you play on your Claude subscription, or with an API key or a self-hosted local model.',
+          ko: '오픈소스 [크랙AI](https://crack.wrtn.ai/) - Claude 구독, API 키, 직접 띄운 로컬 모델로 즐기는 로그라이크 AI 채팅 게임',
         },
         try: { en: site('dice-roguelife'), ko: site('dice-roguelife') + '?lang=ko' },
         tryLabel: { en: 'Play in Claude', ko: 'Claude에서 하기' },
