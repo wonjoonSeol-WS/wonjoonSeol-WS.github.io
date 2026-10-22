@@ -87,7 +87,7 @@ export const groups = [
         name: { en: 'Property simulator', ko: '부동산 투자 시뮬레이터', ja: '不動産投資シミュレーター' },
         what: {
           en: 'Puts the same money into a Korean redevelopment unit, an apartment now, or rent plus the S&P 500, and shows what is left after taxes, loan limits and interest. Korean only.',
-          ko: '같은 돈으로 재개발 입주권, 아파트 매수, 월세 살며 S&P500 적립을 했을 때 세금, 대출 한도, 이자까지 빼고 얼마가 남는지 비교합니다.',
+          ko: '같은 돈을 재개발 입주권, 아파트, S&P500에 넣으면 각각 얼마가 남는지 세금, 대출 한도, 이자까지 빼고 비교해요.',
           ja: '同じ資金で韓国の再開発入居権、今すぐのマンション購入、賃貸に住みながらのS&P500積立を比べ、税金、ローン上限、利息を引いていくら残るかを示します。韓国語のみ。',
         },
         try: { en: 'https://property-simulator-three.vercel.app' },
