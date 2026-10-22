@@ -1,5 +1,6 @@
 // One entry per project. `thumb` is a file in assets/thumbs (960x504); projects without one get a type-only tile.
 // `featured` projects have their own website and also appear in the carousel at the top.
+// `also` is an optional second way to use it ({ label, url }).
 // `try` is where someone can start using it; `code` is the repo.
 // Groups are shown in this order, and projects in the order listed.
 const gh = (repo) => `https://github.com/wonjoonSeol-WS/${repo}`;
@@ -67,8 +68,8 @@ export const groups = [
     ],
   },
   {
-    id: 'claude',
-    name: { en: 'Inside Claude', ko: 'Claude 안에서' },
+    id: 'games',
+    name: { en: 'Games', ko: '게임' },
     projects: [
       {
         id: 'dice-roguelife',
@@ -76,12 +77,23 @@ export const groups = [
         thumb: { en: 'dice-roguelife.webp' },
         name: 'Dice Roguelife',
         what: {
-          en: 'A roguelike chat game. Dice roll your world, race and talent, and Claude narrates each life like a web novel. English, Korean and Japanese.',
-          ko: '주사위가 세계, 종족, 재능을 정하고 Claude가 그 인생을 웹소설처럼 들려주는 로그라이크 채팅 게임. 한국어, 영어, 일본어.',
+          en: 'A roguelike chat game. Dice roll your world, race and talent, and an AI narrates each life like a web novel. Play it in Claude with no setup, or run it on your computer with your own API key or a local model.',
+          ko: '주사위가 세계, 종족, 재능을 정하고 AI가 그 인생을 웹소설처럼 들려주는 로그라이크 채팅 게임. 설치 없이 Claude에서 하거나, 내 컴퓨터에서 API 키나 로컬 모델로 돌릴 수 있어요.',
         },
         try: { en: site('dice-roguelife'), ko: site('dice-roguelife') + '?lang=ko' },
+        tryLabel: { en: 'Play in Claude', ko: 'Claude에서 하기' },
+        also: {
+          label: { en: 'Run it yourself', ko: '직접 실행하기' },
+          url: gh('dice-roguelife') + '/tree/main/standalone#readme',
+        },
         code: gh('dice-roguelife'),
       },
+    ],
+  },
+  {
+    id: 'claude',
+    name: { en: 'Inside Claude', ko: 'Claude 안에서' },
+    projects: [
       {
         id: 'language-mistake-tracker',
         thumb: { en: 'language-mistake-tracker.webp' },

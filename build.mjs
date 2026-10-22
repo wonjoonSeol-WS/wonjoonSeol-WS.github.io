@@ -60,11 +60,15 @@ function thumb(p, lang, eager = false) {
   return `<img class="thumb" src="${text[lang].root}assets/thumbs/${file}" width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}>`;
 }
 
+function also(p, lang) {
+  return p.also ? `<a class="also" href="${esc(p.also.url)}"${count(`also-${p.id}`)}>${esc(pick(p.also.label, lang))}</a>` : '';
+}
+
 function links(p, lang) {
   const t = text[lang];
   const tryUrl = pick(p.try, lang);
   const tryLabel = pick(p.tryLabel, lang) ?? t.try;
-  return `<p class="links">${tryUrl ? `<a class="try" href="${esc(tryUrl)}"${count(`try-${p.id}`)}>${esc(tryLabel)}</a>` : ''}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>`;
+  return `<p class="links">${tryUrl ? `<a class="try" href="${esc(tryUrl)}"${count(`try-${p.id}`)}>${esc(tryLabel)}</a>` : ''}${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>`;
 }
 
 function slide(p, lang, i, n) {
@@ -75,7 +79,7 @@ function slide(p, lang, i, n) {
           <div class="slide-text">
             <h3 class="slide-name">${esc(p.name)}</h3>
             <p class="what">${esc(pick(p.what, lang))}</p>
-            <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${t.visit}</a><a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
+            <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}<a class="code" href="${esc(p.code)}"${count(`code-${p.id}`)}>${t.code}</a></p>
           </div>
         </li>`;
 }
