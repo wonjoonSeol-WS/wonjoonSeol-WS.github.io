@@ -115,7 +115,7 @@ export const groups = [
         id: 'dice-roguelife',
         license: 'MIT',
         featured: true,
-        thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp' },
+        thumb: { en: 'dice-roguelife-en.webp', ko: 'dice-roguelife-ko.webp', ja: 'dice-roguelife-ja.webp' },
         name: 'Dice Roguelife',
         what: {
           en: 'Open-source alternative to [Crack](https://crack.wrtn.ai/), the Korean AI character chat app: a roguelike AI chat game you play on your Claude subscription, or with an API key or a self-hosted local model.',
