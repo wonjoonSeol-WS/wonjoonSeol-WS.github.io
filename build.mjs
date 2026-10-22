@@ -1,4 +1,4 @@
-// Builds index.html (English) and ko/index.html (Korean) from projects.mjs.
+// Builds index.html (English), ko/index.html (Korean) and ja/index.html (Japanese) from projects.mjs.
 // Run: node build.mjs
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { groups } from './projects.mjs';
@@ -29,7 +29,7 @@ const text = {
     here: 'You came from this one',
     footer: 'Everything is free to use, and each card shows its license. Found a bug? Open an issue on that project.',
     all: 'All repositories on GitHub',
-    langs: [['en', './', 'EN', true], ['ko', 'ko/', '한국어', false]],
+    langs: [['en', './', 'EN', true], ['ko', 'ko/', '한국어', false], ['ja', 'ja/', '日本語', false]],
     root: './',
   },
   ko: {
@@ -53,19 +53,48 @@ const text = {
     here: '여기서 오셨어요',
     footer: '모두 무료이고, 라이선스는 카드마다 적혀 있습니다. 버그를 찾으면 해당 프로젝트에 이슈를 남겨 주세요.',
     all: 'GitHub의 전체 저장소',
-    langs: [['en', '../', 'EN', false], ['ko', './', '한국어', true]],
+    langs: [['en', '../', 'EN', false], ['ko', './', '한국어', true], ['ja', '../ja/', '日本語', false]],
+    root: '../',
+  },
+  ja: {
+    title: 'Wonjoon Seol: オープンソース',
+    description: 'Wonjoon Seolが作った小さなオープンソースツール集: Androidアプリ、字幕の拡張機能、Claudeのアドオン、Windowsツール。',
+    h1: '小さなツール、気軽にどうぞ。',
+    lead: '自分の困りごとを解決するために作ったものをGitHubに置いています。しっかり作り込んだものもあれば、雑なものもあります。使う場所から選んでください。',
+    by: 'GitHubのWonjoon Seol',
+    sites: '専用サイトがあるプロジェクト',
+    prev: '前のプロジェクト',
+    next: '次のプロジェクト',
+    visit: 'サイトを見る',
+    allProjects: 'すべてのプロジェクト',
+    filter: 'プロジェクトを絞り込む',
+    everything: 'すべて',
+    try: '試してみる',
+    code: 'コード',
+    deprecated: '開発終了',
+    fromNote: (name) => `${name}から来られたんですね。ほかのプロジェクトもどうぞ。`,
+    here: 'ここから来られました',
+    footer: 'すべて無料のオープンソースです。バグを見つけたら、そのプロジェクトにIssueを立ててください。',
+    all: 'GitHubのすべてのリポジトリ',
+    langs: [['en', '../', 'EN', false], ['ko', '../ko/', '한국어', false], ['ja', './', '日本語', true]],
     root: '../',
   },
 };
 
+// Body font per language: Pretendard (Korean) and Pretendard JP (Japanese) from the same release.
+const FONT_CSS = {
+  ko: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css',
+  ja: 'https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/packages/pretendard-jp/dist/web/variable/pretendardvariable-jp-dynamic-subset.min.css',
+};
+
 // short platform names: the filter chips and the label on each card
 const SHORT = {
-  android: { en: 'Android', ko: '안드로이드' },
-  browser: { en: 'Web', ko: '웹' },
-  games: { en: 'Games', ko: '게임' },
-  claude: { en: 'Claude', ko: 'Claude' },
-  desktop: { en: 'PC', ko: 'PC' },
-  tools: { en: 'Tools', ko: '도구' },
+  android: { en: 'Android', ko: '안드로이드', ja: 'Android' },
+  browser: { en: 'Web', ko: '웹', ja: 'Web' },
+  games: { en: 'Games', ko: '게임', ja: 'ゲーム' },
+  claude: { en: 'Claude', ko: 'Claude', ja: 'Claude' },
+  desktop: { en: 'PC', ko: 'PC', ja: 'PC' },
+  tools: { en: 'Tools', ko: '도구', ja: 'ツール' },
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -128,7 +157,6 @@ function card(p, g, lang, i) {
 
 function page(lang) {
   const t = text[lang];
-  const other = lang === 'en' ? 'ko' : 'en';
   const featured = groups.flatMap((g) => g.projects).filter((p) => p.featured);
   return `<!doctype html>
 <html lang="${lang}">
@@ -140,12 +168,12 @@ function page(lang) {
   <meta name="description" content="${esc(t.description)}">
   <meta property="og:title" content="${esc(t.title)}">
   <meta property="og:description" content="${esc(t.description)}">
-  <link rel="alternate" hreflang="${other}" href="${ORIGIN}${other === 'ko' ? 'ko/' : ''}">
+  ${Object.keys(text).filter((l) => l !== lang).map((l) => `<link rel="alternate" hreflang="${l}" href="${ORIGIN}${l === 'en' ? '' : `${l}/`}">`).join('\n  ')}
   <link rel="icon" href="${t.root}assets/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Instrument+Sans:wght@400;500;600&display=swap">
-  ${lang === 'ko' ? '<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">\n  ' : ''}<link rel="stylesheet" href="${t.root}assets/style.css">
+  ${FONT_CSS[lang] ? `<link rel="stylesheet" href="${FONT_CSS[lang]}">\n  ` : ''}<link rel="stylesheet" href="${t.root}assets/style.css">
   ${GOATCOUNTER ? `<script data-goatcounter="https://${GOATCOUNTER}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>` : ''}
 </head>
 <body>
@@ -254,6 +282,8 @@ function page(lang) {
 }
 
 writeFileSync('index.html', page('en'));
-mkdirSync('ko', { recursive: true });
-writeFileSync('ko/index.html', page('ko'));
-console.log('Built index.html and ko/index.html');
+for (const lang of ['ko', 'ja']) {
+  mkdirSync(lang, { recursive: true });
+  writeFileSync(`${lang}/index.html`, page(lang));
+}
+console.log('Built index.html, ko/index.html and ja/index.html');

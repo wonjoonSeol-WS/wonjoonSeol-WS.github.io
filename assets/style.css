@@ -42,6 +42,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 body:lang(ko) { word-break: keep-all; }
+html:lang(ja) {
+  --display: "Bricolage Grotesque", "Pretendard JP Variable", system-ui, sans-serif;
+  --body: "Instrument Sans", "Pretendard JP Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
 a { color: var(--link); text-underline-offset: .2em; text-decoration-thickness: 1px; }
 a:focus-visible, button:focus-visible, .track:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
 ul { list-style: none; margin: 0; padding: 0; }
@@ -68,12 +72,13 @@ h1 {
   text-wrap: balance;
   margin: 0 0 10px;
 }
-h1:lang(ko) { font-variation-settings: normal; line-height: 1.12; letter-spacing: -.03em; }
+h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; letter-spacing: -.03em; }
 .lead { font-size: 1.05rem; color: var(--muted); max-width: 44rem; margin: 0; text-wrap: pretty; }
 /* justified text: hyphenate English so the spacing stays even. Korean keeps whole words, which leaves
-   wide gaps when justified, so it stays left-aligned */
+   wide gaps when justified, so it stays left-aligned. Japanese has no spaces, so it justifies evenly without hyphens */
 .lead, .card .what, .slide-text .what { text-align: justify; hyphens: auto; }
 :lang(ko) .lead, :lang(ko) .card .what, :lang(ko) .slide-text .what { text-align: start; hyphens: manual; }
+:lang(ja) .lead, :lang(ja) .card .what, :lang(ja) .slide-text .what { hyphens: manual; }
 .from-note {
   display: inline-block;
   background: var(--note);

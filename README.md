@@ -1,7 +1,7 @@
 # wonjoonseol-ws.github.io
 
-Index of my projects, served at https://wonjoonseol-ws.github.io/ (English) and /ko/ (Korean).
+Index of my projects, served at https://wonjoonseol-ws.github.io/ (English), /ko/ (Korean) and /ja/ (Japanese).
 
-Edit `projects.mjs`, then run `node build.mjs` to regenerate `index.html` and `ko/index.html`.
+Edit `projects.mjs`, then run `node build.mjs` to regenerate `index.html`, `ko/index.html` and `ja/index.html`.
 
 Project sites link here with `?from=<project id>`, which marks that project on the page.
