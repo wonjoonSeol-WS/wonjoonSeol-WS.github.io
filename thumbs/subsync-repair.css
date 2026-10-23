@@ -1,0 +1,24 @@
+/* Japanese reference cues, the English cues drifting around an ad break, and the same cues realigned.
+   Set in Noto Sans KR (its Latin is Source Sans), Japanese falling back to Noto Sans JP. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; background: #121619; }
+body { position: relative; font-family: "Noto Sans KR", "Noto Sans JP", sans-serif; font-weight: 700; color: #e8ecef; }
+.label { position: absolute; left: 28px; margin: 0; line-height: 1; transform: translateY(-50%); }
+.ref-label { top: 69px; font-size: 19px; }
+.before-label { top: 253px; font-size: 24px; color: #ea7475; }
+.after-label { top: 393px; font-size: 24px; color: #6bbf87; }
+.ad, .time { position: absolute; margin: 0; font-weight: 400; color: #7f898e; line-height: 1; transform: translate(-50%, -50%); }
+.ad { left: 583px; top: 35px; font-size: 19px; color: #8d969b; }
+.time { top: 473px; font-size: 16px; }
+.time.start { left: 210px; transform: translateY(-50%); }
+.time.mid { left: 583px; }
+.time.end { left: 935px; transform: translate(-100%, -50%); }
+svg { position: absolute; inset: 0; }
+.track { stroke: #2c3239; stroke-width: 1; }
+.ad-line { stroke: #6f7a80; stroke-width: 1.5; stroke-dasharray: 6 6; }
+.drift { stroke: #e0605f; stroke-width: 1.5; }
+.fix { stroke: #45b872; stroke-width: 1.5; }
+.cue { position: absolute; box-sizing: border-box; height: 46px; display: grid; place-items: center; border: 1.5px solid; border-radius: 7px; font-size: 17px; white-space: nowrap; }
+.cue.small { font-size: 14px; }
+.ref .cue { top: 92px; border-color: #454e52; background: rgba(0, 0, 0, .55); color: #fff; font-size: 15px; }
+.before .cue { top: 232px; border-color: #47452f; background: rgba(0, 0, 0, .35); color: #a89b4f; }
+.after .cue { top: 372px; border-color: #dcc35e; background: rgba(0, 0, 0, .55); color: #f5d565; }

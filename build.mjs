@@ -1,6 +1,6 @@
 // Builds index.html (English), ko/index.html (Korean) and ja/index.html (Japanese) from projects.mjs.
 // Run: node build.mjs
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { groups, top, bottom } from './projects.mjs';
 
 const ORIGIN = 'https://wonjoonseol.github.io/';
@@ -117,11 +117,21 @@ const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '')
 const rank = (p) => (top.includes(p.id) ? top.indexOf(p.id) : top.length + (p.deprecated ? 2 : bottom.includes(p.id) ? 1 : 0));
 const byTop = (a, b) => rank(a) - rank(b);
 
-// A thumbnail is a button that opens the image full size; `extra` is a class added to that button.
-function thumb(p, lang, eager = false, extra = '') {
+// How wide a thumbnail is shown, so sharp screens fetch the 2400px copy only where they need it:
+// a grid card is at most about 440px wide (112px on phones), a carousel slide about 780px.
+const SIZES = {
+  card: '(max-width: 600px) 112px, (max-width: 640px) 100vw, 440px',
+  slide: '(max-width: 760px) 100vw, 780px',
+};
+
+// A thumbnail (`kind` is card or slide) is a button that opens the image full size. render-thumbs.mjs
+// writes each one at 960px and at 2400px in assets/thumbs/full, for sharp screens and the enlarged view.
+function thumb(p, lang, kind, eager = false) {
   const file = pick(p.thumb, lang);
   if (!file) return `<div class="thumb thumb-type" aria-hidden="true"><span>${esc(pick(p.name, lang))}</span></div>`;
-  return `<button type="button" class="zoom${extra ? ` ${extra}` : ''}" aria-label="${text[lang].enlarge}: ${esc(pick(p.name, lang))}"${count(`zoom-${p.id}`)}><img class="thumb" src="${text[lang].root}assets/thumbs/${file}" width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}></button>`;
+  const dir = `${text[lang].root}assets/thumbs/`;
+  const srcset = existsSync(`assets/thumbs/full/${file}`) ? ` srcset="${dir}${file} 960w, ${dir}full/${file} 2400w" sizes="${SIZES[kind]}"` : '';
+  return `<button type="button" class="zoom${kind === 'slide' ? ' slide-shot' : ''}" aria-label="${text[lang].enlarge}: ${esc(pick(p.name, lang))}"${count(`zoom-${p.id}`)}><img class="thumb" src="${dir}${file}"${srcset} width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}></button>`;
 }
 
 // The project's name links to its own website, or else to its GitHub repo.
@@ -150,7 +160,7 @@ function slide(p, lang, i, n) {
   const t = text[lang];
   return `
         <li class="slide" id="slide-${p.id}" aria-roledescription="slide" aria-label="${i + 1} / ${n}: ${esc(pick(p.name, lang))}">
-          ${thumb(p, lang, i === 0, 'slide-shot')}
+          ${thumb(p, lang, 'slide', i === 0)}
           <div class="slide-text">
             <h3 class="slide-name">${title(p, lang)}</h3>
             <p class="what">${rich(pick(p.what, lang))}</p>
@@ -164,7 +174,7 @@ function card(p, g, lang, i) {
   const t = text[lang];
   return `
         <li class="card" id="${p.id}" data-group="${g.id}" data-name="${esc(pick(p.name, lang))}">
-          ${thumb(p, lang, i < 4)}
+          ${thumb(p, lang, 'card', i < 4)}
           <div class="card-body">
           <p class="platform">${esc(pick(SHORT[g.id], lang))}${p.deprecated ? `<span class="deprecated">${t.deprecated}</span>` : ''}${p.license ? `<span class="license" title="${t.license}">${esc(p.license)}</span>` : ''}</p>
           <h3 class="name">${title(p, lang)}</h3>
@@ -245,7 +255,7 @@ function page(lang) {
   </footer>
 
   <dialog class="lightbox">
-    <img alt="">
+    <img alt="" sizes="min(1200px, 92vw)">
     <button type="button" class="close" aria-label="${t.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   </dialog>
 
@@ -295,7 +305,8 @@ function page(lang) {
       document.querySelectorAll('.zoom').forEach(function (b) {
         var img = b.querySelector('img');
         b.addEventListener('click', function () {
-          boxImg.src = img.currentSrc || img.src;
+          boxImg.srcset = img.getAttribute('srcset') || '';
+          boxImg.src = img.src;
           boxImg.alt = b.closest('li').querySelector('h3').textContent;
           box.showModal();
         });

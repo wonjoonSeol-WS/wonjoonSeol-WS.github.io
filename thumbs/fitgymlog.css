@@ -1,0 +1,55 @@
+/* FitGymLog card: the site's hero (wordmark, headline, lead) beside the Galaxy Fit3 drawing over a workout screenshot.
+   Positions follow the site's 1200x630 link preview (images/og-*.jpg) scaled by 0.8. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; }
+body {
+  position: relative;
+  background: #000;
+  color: #f1f2f4;
+  font-family: Barlow, "Pretendard Variable", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand {
+  position: absolute; left: 57.6px; top: var(--brand-top);
+  display: flex; align-items: center; gap: 11.4px;
+  font: 700 27.2px/1 "Barlow Semi Condensed", sans-serif;
+}
+.brand svg { display: block; width: 35.2px; height: 35.2px; }
+
+h1 {
+  position: absolute; left: 57.6px; top: var(--h1-top); margin: 0;
+  font: 800 70.4px/.98 "Barlow Semi Condensed", "Pretendard Variable", sans-serif;
+  letter-spacing: -.02em;
+}
+.lead {
+  position: absolute; left: 57.6px; top: var(--lead-top); margin: 0;
+  font: 400 21.9px/1.2 Barlow, "Pretendard Variable", sans-serif;
+  color: #a3a9b3;
+}
+:lang(ko) h1, :lang(ko) .lead { font-family: "Pretendard Variable", sans-serif; word-break: keep-all; }
+:lang(ko) h1 { font-size: 56.7px; line-height: 1.12; letter-spacing: -.03em; }
+:lang(ko) .lead { font-size: 21px; }
+
+.phone {
+  position: absolute; left: 684.8px; top: 14.4px; width: 228.4px;
+  border: 1px solid #26272b; border-radius: 24px; overflow: hidden; background: #000;
+}
+.phone img { display: block; width: 100%; height: auto; }
+
+.fit3 {
+  position: absolute; left: 539.8px; top: 184.8px; width: 188.2px; height: 313.6px;
+  overflow: visible; filter: drop-shadow(0 9.6px 19.2px rgba(0, 0, 0, .35));
+}
+.fit3 .strap { fill: #d8d3c6; }
+.fit3 .lug { fill: #1d1e21; }
+.fit3 .frame { fill: #b9bcc2; }
+.fit3 .bezel { fill: #15161a; }
+.fit3 .screen { fill: #000; }
+.fit3 .clock { fill: #fff; font: 600 17px Barlow, sans-serif; }
+.fit3 .title, .fit3 .sub { fill: #fff; font: 600 14.5px Barlow, "Pretendard Variable", sans-serif; }
+.fit3 .btn { fill: #3a3546; }
+.fit3 .btn.ring { fill: #2a2633; stroke: #4b4459; stroke-width: 4; }
+.fit3 .glyph { fill: #fff; }
+.fit3 .mute { fill: none; stroke: #fff; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.fit3 .handle { fill: #fff; }
+.fit3 .wave { fill: none; stroke: #34c759; stroke-width: 4; stroke-linecap: round; }

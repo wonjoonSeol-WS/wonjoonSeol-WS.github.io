@@ -1,0 +1,27 @@
+/* QuietBuzz card: headline, caption and wordmark in Roboto (Noto Sans KR for Korean), the Android faces the app
+   shows in, beside a notification category screen with its Vibration row outlined. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; }
+body {
+  position: relative;
+  background: #0e1216;
+  color: #fff;
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body:lang(ko) { font-family: "Noto Sans KR", sans-serif; word-break: keep-all; }
+
+h1, .lead, .wordmark { position: absolute; left: 56px; margin: 0; white-space: nowrap; }
+h1 { top: var(--h1-top); font-size: var(--h1-size); line-height: var(--h1-line); font-weight: 700; }
+.lead { top: var(--lead-top); font-size: var(--lead-size); line-height: 36px; font-weight: 400; color: #a1a7ab; }
+.wordmark { top: var(--wordmark-top); font-size: var(--wordmark-size, 26px); line-height: 1; font-weight: 700; color: #4a9bff; }
+
+.shot {
+  position: absolute; top: 24px; right: 48px; width: var(--shot-width); height: 456px;
+  border-radius: 18px; overflow: hidden;
+}
+.shot img { display: block; width: 100%; height: auto; margin-top: var(--shot-shift); }
+.ring {
+  position: absolute; box-sizing: border-box;
+  left: var(--ring-x); top: var(--ring-y); width: var(--ring-w); height: var(--ring-h);
+  border: var(--ring-stroke) solid #e53935; border-radius: var(--ring-radius);
+}

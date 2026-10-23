@@ -1,4 +1,5 @@
-// One entry per project. `thumb` is a file in assets/thumbs (960x504); projects without one get a type-only tile.
+// One entry per project. `thumb` is a file in assets/thumbs (960x504), rendered from thumbs/<name>.html by
+// render-thumbs.mjs along with a 2400x1260 copy in assets/thumbs/full; projects without one get a type-only tile.
 // `featured` projects have their own website and also appear in the carousel at the top.
 // A project's name links to that website (`try`), or to `code` when it is not featured.
 // `warn` is shown above the links when trying it blindly can hurt. `what` may contain [text](https://...) links.

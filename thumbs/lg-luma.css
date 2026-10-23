@@ -1,0 +1,12 @@
+/* Luma for webOS 6: a dark title band over the Apps screen captured on an LG C1 running the build as Home.
+   Set in the Windows UI fonts the card has always used: Segoe UI for English, Malgun Gothic for Korean. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; background: #101113; }
+body { position: relative; font-family: "Segoe UI", sans-serif; }
+:lang(ko) body { font-family: "Malgun Gothic", sans-serif; }
+h1, p { position: absolute; margin: 0; line-height: normal; white-space: nowrap; }
+/* The first card put the ascender line at y 8 and 50 with the ascent rounded up; Chrome rounds it to the nearest pixel. */
+h1 { left: 20px; top: 9px; font-size: 30px; font-weight: 700; color: #f0f0f0; }
+:lang(ko) h1 { top: 8px; }
+p { left: 21px; top: 51px; font-size: 16px; color: #96989e; }
+/* x 60-1860, y 250-1010 of the 1920x1080 capture: the app grid with its names */
+img { position: absolute; left: 20px; top: 104px; width: 920px; height: 388px; }

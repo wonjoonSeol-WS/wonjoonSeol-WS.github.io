@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Two Explorer-style trees of the same Japanese ZIP, set in the Windows UI fonts. NanaZip's default garbles
+     the names (the Shift-JIS bytes read as code page 949, invalid bytes shown as "_" like Windows does in
+     a file name); the auto encoding menu keeps them. -->
+<style>
+  html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; background: #fff; color: #1b1b1b; }
+  body { display: flex; align-items: center; font: 19.5px/1 "Segoe UI", sans-serif; }
+  .tree { box-sizing: border-box; width: 480px; height: 254px; padding: 4px 0 0 58px; }
+  .tree + .tree { border-left: 1px solid #e3e3e3; padding-left: 16px; }
+  [lang="ko"] { font-family: "Segoe UI", "Malgun Gothic", sans-serif; }
+  [lang="ja"] { font-family: "Segoe UI", "Yu Gothic UI", "Yu Gothic", sans-serif; }
+  h2 { margin: 0 0 20px; padding-left: 15px; border-left: 4px solid; font: 600 22px/32px "Segoe UI", sans-serif; }
+  .before h2 { border-color: #e03342; }
+  .after h2 { border-color: #1f8a4c; }
+  ul { list-style: none; margin: 0; padding: 0 0 0 13px; }
+  li { display: flex; align-items: center; gap: 13px; height: 37.5px; }
+  .l1 { padding-left: 26px; }
+  .l2 { padding-left: 54px; }
+  .folder::before, .file::before { content: ""; flex: none; }
+  .folder::before { width: 20px; height: 15px; margin-top: 2px; background: #f0bf4c; border-radius: 1px 2px 2px 2px; box-shadow: 0 -3px 0 -1px #f0bf4c; clip-path: polygon(0 -3px, 8px -3px, 10px 0, 100% 0, 100% 100%, 0 100%); }
+  .file::before { width: 14px; height: 19px; margin: 0 3px; border: 1.5px solid #7a7a7a; box-sizing: border-box; }
+</style>
+</head>
+<body>
+  <section class="tree before" lang="ko">
+    <h2 lang="en">NanaZip (default)</h2>
+    <ul>
+      <li class="folder">럱뿿</li>
+      <li class="folder l1">롃_</li>
+      <li class="file l2">뢜뜃롃_.jpg</li>
+      <li class="file l1">됵땉긽긾.txt</li>
+      <li class="file">먣뼻룕.txt</li>
+    </ul>
+  </section>
+  <section class="tree after" lang="ja">
+    <h2 lang="en">NanaZip auto encoding</h2>
+    <ul>
+      <li class="folder">資料</li>
+      <li class="folder l1">写真</li>
+      <li class="file l2">集合写真.jpg</li>
+      <li class="file l1">会議メモ.txt</li>
+      <li class="file">説明書.txt</li>
+    </ul>
+  </section>
+</body>
+</html>

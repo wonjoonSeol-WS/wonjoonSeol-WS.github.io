@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Block KakaoPay: the top of the README's news feed before/after (images/before-after-news-feed.png in
+     morphe-patches), with the two masked phone captures in place of the downscaled copy. Positions are that
+     1662px-wide image's layout scaled by 960/1662; everything is set in Malgun Gothic like the README image. -->
+<style>
+  html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; background: #0c0c0e; }
+  body { position: relative; font-family: "Malgun Gothic", sans-serif; color: #ececee; }
+  h1, p, h2 { position: absolute; margin: 0; line-height: normal; white-space: nowrap; transform: translateY(-50%); }
+  h1 { left: 20.79px; top: 19.64px; font-size: 23.1px; font-weight: 700; }
+  p { left: 20.79px; top: 43.9px; font-size: 15.6px; color: #9b9ba0; }
+  .shot { position: absolute; top: 0; left: 20.79px; }
+  .shot + .shot { left: 492.71px; }
+  h2 { left: 17.33px; top: 70.47px; font-size: 18.48px; font-weight: 700; }
+  h2::before { content: ""; position: absolute; left: -17.33px; top: calc(50% - 5.78px); width: 12.13px; height: 12.13px; border-radius: 50%; background: var(--dot); }
+  .before { --dot: #ec5c5c; }
+  .after { --dot: #74cc8a; }
+  .shot img { position: absolute; left: 0; top: 86.64px; width: 446.5px; }
+  .shot::after { content: ""; position: absolute; left: -0.58px; top: 86.06px; width: 447.66px; height: 707px; box-sizing: border-box; border: 1.16px solid #37373c; }
+</style>
+</head>
+<body>
+  <h1>News (<span lang="ko">소식</span>) feed - sponsored card removed</h1>
+  <p>The feed/BizBoard ad no longer loads or reserves its slot.</p>
+  <section class="shot before">
+    <h2>Before</h2>
+    <img src="img/morphe-patches/before.webp" alt="">
+  </section>
+  <section class="shot after">
+    <h2>After</h2>
+    <img src="img/morphe-patches/after.webp" alt="">
+  </section>
+</body>
+</html>

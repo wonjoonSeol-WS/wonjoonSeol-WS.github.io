@@ -1,0 +1,213 @@
+/* Dice Roguelife card: label, gradient headline and caption beside two tilted screens, the Status Window on a phone and
+   the system boxes on a tablet. Both screens are the game's own markup and CSS (src/styles.css, dark theme), copied
+   under .dr, so they stay sharp at any scale. Inside a screen, sizes are the game's CSS px: the phone shows a 420x900
+   window, the tablet a 670 px wide story card. Positions and angles were measured from the earlier card. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; }
+body {
+  position: relative;
+  background:
+    radial-gradient(820px 432px at 766px 10px, rgba(190, 32, 120, 0.51), transparent 70%),
+    radial-gradient(680px 360px at 22px 504px, rgba(14, 125, 123, 0.57), transparent 70%),
+    #07090a;
+}
+
+.copy { position: absolute; left: 52px; top: 0; width: 470px; word-break: keep-all; will-change: transform; } /* own layer: grayscale antialiasing, no color fringes */
+.label { position: absolute; left: 2px; top: 122px; margin: 0; font: 400 17px/1 "Black Han Sans", sans-serif; letter-spacing: 0.172em; color: #5fe3e8; white-space: nowrap; }
+.headline {
+  position: absolute; left: -3px; top: 157px; margin: 0;
+  font: 400 73px/76px "Black Han Sans", sans-serif; letter-spacing: -0.008em; white-space: nowrap;
+  /* where the pink and the purple ends sit differs per language, as on the earlier cards */
+  background: linear-gradient(90deg, #fd51a4 var(--from), #a35dfb var(--to)) no-repeat;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.caption { position: absolute; left: 1.5px; top: 325px; margin: 0; font: 400 25.2px/36px "Noto Serif KR", serif; color: #e4e8f2; white-space: nowrap; }
+/* the Korean card sets the copy in other sizes, as the earlier one did */
+:lang(ko) .headline { top: 158px; font-size: 76.5px; line-height: 82px; letter-spacing: 0; }
+:lang(ko) .caption { top: 335px; font-size: 24.5px; line-height: 37px; }
+
+/* A device is a frame (bezel inside its padding, a 2 px rim on top) around one screen of the game. Each transform turns
+   about the screen's center; the screen's top-left corner, before the transform, is the frame's position plus padding. */
+.device { position: absolute; box-sizing: border-box; overflow: hidden; }
+.device::after { content: ""; position: absolute; z-index: 30; inset: 0; border-radius: inherit; border: 2px solid var(--rim); pointer-events: none; }
+.device > .dr { overflow: hidden; border-radius: var(--screen-radius, 0); }
+.phone {
+  --rim: #585a66;
+  left: 476.9px; top: -126.4px; width: 420px; height: 900px; border-radius: 34px;
+  transform: rotate(-5deg) scale(0.7037);
+}
+.tablet {
+  --rim: #3d4248;
+  left: 481.1px; top: 143.9px; width: 710px; height: 455px; padding: 31px 20px 29px;
+  border-radius: 38px; background: #0f1319;
+  transform-origin: 355px 228.5px;
+  transform: perspective(1000px) rotateX(3deg) rotateY(3deg) rotate(4deg) scale(0.5256);
+}
+/* At 1x the tablet's 1 px rules come out beaded after the 3D resampling; a slight blur before it keeps them even.
+   The 2.5x render does not need it. */
+@media (max-resolution: 1dppx) { .tablet .boxes { filter: blur(0.5px); } }
+
+/* The Japanese card came later: its own glow, a smaller label and headline (in Dela Gothic One, as Black Han Sans has no
+   kana), and devices with black bezels. */
+html:lang(ja) body {
+  background:
+    radial-gradient(497px 451px at 921px -54px, rgba(255, 35, 172, 0.375), transparent 70%),
+    radial-gradient(558px 328px at -32px 522px, rgba(26, 173, 156, 0.36), transparent 70%),
+    #040608;
+}
+:lang(ja) .label { top: 120px; font-size: 15.5px; letter-spacing: 0.13em; }
+:lang(ja) .headline { left: 0; top: 145px; font-family: "Dela Gothic One", sans-serif; font-size: 64.4px; line-height: 85px; }
+:lang(ja) .caption { top: 330px; font-size: 25px; line-height: 39px; color: #fff; }
+:lang(ja) .phone {
+  --rim: #333539; --screen-radius: 28px;
+  left: 468.6px; top: -154.2px; width: 444px; height: 924px; padding: 12px; border-radius: 40px; background: #0a0c0e;
+  transform: rotate(-5deg) scale(0.6573);
+}
+:lang(ja) .phone::before { /* a camera hole, as on the earlier card */
+  content: ""; position: absolute; z-index: 30; left: 402.6px; top: 22.2px; width: 12.8px; height: 12.8px;
+  border: 1.2px solid rgba(255, 255, 255, 0.45); border-radius: 50%;
+}
+:lang(ja) .tablet {
+  --rim: #343638;
+  left: 484.8px; top: 141.3px; width: 704px; height: 630px; padding: 35px 17px 200px;
+  border-radius: 42px; background: #0a0b0c;
+  transform-origin: 352px 232.5px;
+  transform: perspective(1000px) rotateX(3deg) rotateY(3deg) rotate(4deg) scale(0.5306);
+}
+:lang(ja) .tablet .boxes { height: 595px; } /* the story card runs on past the bottom of the card */
+:lang(ja) .tablet .ai { min-height: calc(100% + 2px); }
+
+/* ---- the game's UI, dark theme (Dice Roguelife src/styles.css) ---- */
+.dr {
+  --bg: #000000;
+  --panel: #07090f;
+  --panel2: #10131d;
+  --ink: #e4e8f2;
+  --sub: #8c96b0;
+  --line: #1b2030;
+  --sys: #7fb4ff;
+  --sysc: #5fe3e8;
+  --gold: #f2c14e;
+  --danger: #ff6b7f;
+  --shadow: none;
+  --t-B: #7fb4ff;
+  --serif: "Noto Serif KR", "Nanum Myeongjo", "AppleMyungjo", serif;
+  --sans: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --display: "Black Han Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", sans-serif;
+  position: relative;
+  box-sizing: border-box;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.dr *, .dr ::before, .dr ::after { box-sizing: inherit; }
+.dr:lang(ja), .dr:lang(ja) .narr { word-break: auto-phrase; line-break: strict; }
+.dr button { font: inherit; color: inherit; }
+
+/* the phone: header, then the status window over a dimmed screen */
+.screen { width: 420px; height: 900px; background: var(--bg); }
+.dr header.top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; padding: 10px 14px 6px; border-bottom: 1px solid var(--line); background: var(--bg); }
+.dr .brand { font-family: var(--display); font-size: 20px; letter-spacing: 0.5px; margin-right: auto; line-height: 1; white-space: nowrap; }
+.dr .brand small { display: block; font-family: var(--sans); font-size: 11px; color: var(--sub); letter-spacing: 0; margin-top: 3px; }
+.dr nav.tabs { display: flex; gap: 2px; background: var(--panel2); border-radius: 10px; padding: 3px; width: 100%; justify-content: space-between; order: 3; }
+.dr nav.tabs button { border: 0; background: transparent; border-radius: 8px; color: var(--sub); flex: 1 1 0%; padding: 6px 2px; font-size: 12.5px; white-space: nowrap; }
+.dr nav.tabs button[aria-current="true"] { background: var(--panel); color: var(--ink); font-weight: 700; box-shadow: var(--shadow); }
+.dr .btn { border: 1px solid var(--line); background: var(--panel); padding: 8px 14px; border-radius: 10px; font-weight: 500; }
+.dr .btn.ghost { background: transparent; }
+.dr .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.dr .tier { font-family: var(--display); font-size: 12px; padding: 0 6px; border-radius: 5px; border: 1px solid currentcolor; line-height: 18px; display: inline-block; }
+.dr .tier.B { color: var(--t-B); }
+.dr .sheet { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.75); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 20; }
+.dr .sheet .inner { width: 100%; max-width: 520px; max-height: 90%; overflow: hidden; border-radius: 12px; }
+.dr .sheet .inner > .row { justify-content: center; }
+.dr .sw {
+  position: relative; padding: 18px 16px 16px; border-radius: 4px; color: rgb(234, 243, 255);
+  background: linear-gradient(160deg, rgba(38, 92, 170, 0.62), rgba(14, 38, 86, 0.72));
+  border: 1px solid rgba(160, 205, 255, 0.75);
+  box-shadow: rgba(60, 120, 220, 0.35) 0 0 0 1px, rgba(80, 150, 255, 0.35) 0 0 28px, rgba(120, 180, 255, 0.12) 0 0 40px inset;
+  backdrop-filter: blur(8px);
+  font-family: var(--serif);
+}
+.dr .sw::before, .dr .sw::after { content: ""; position: absolute; inset: 6px; border: 1px solid rgba(160, 205, 255, 0.35); pointer-events: none; border-radius: 2px; }
+.dr .sw::after { inset: 9px; border-color: rgba(160, 205, 255, 0.18); }
+.dr .sw .orn { position: absolute; width: 56px; height: 22px; pointer-events: none; color: rgba(190, 220, 255, 0.9); }
+.dr .sw .orn.tl { left: 10px; top: 8px; }
+.dr .sw .orn.tr { right: 10px; top: 8px; transform: scaleX(-1); }
+.dr .sw .orn.bl { left: 10px; bottom: 8px; transform: scaleY(-1); }
+.dr .sw .orn.br { right: 10px; bottom: 8px; transform: scale(-1); }
+.dr .sw .xx { position: absolute; right: 68px; top: 12px; padding: 4px 8px; font-family: var(--sans); font-size: 12px; color: rgba(200, 225, 255, 0.8); letter-spacing: 2px; }
+.dr .sw-title { text-align: center; font-size: 20px; letter-spacing: 6px; margin: 6px 0 14px; font-weight: 600; text-shadow: rgba(120, 180, 255, 0.8) 0 0 12px; }
+.dr .sw-head { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; font-size: 14.5px; margin-bottom: 6px; }
+.dr .sw-head .kv { display: flex; gap: 6px; }
+.dr .sw-head .kv > span:first-child { color: rgba(200, 225, 255, 0.85); white-space: nowrap; }
+.dr .sw-head .kv > span:first-child::after { content: " :"; }
+.dr .sw-head .ttl { color: rgb(255, 233, 166); }
+.dr .sw-line { height: 1px; background: linear-gradient(90deg, transparent, rgba(190, 220, 255, 0.8), transparent); margin: 10px 0; position: relative; }
+.dr .sw-line::after { content: "◆"; position: absolute; right: 0; top: -9px; font-size: 10px; color: rgba(190, 220, 255, 0.9); }
+.dr .sw-hp { font-size: 14.5px; }
+.dr .sw-hp .row { justify-content: space-between; }
+.dr .sw-hp .bar { height: 6px; background: rgba(255, 255, 255, 0.15); border-radius: 3px; overflow: hidden; margin-top: 5px; }
+.dr .sw-hp .bar i { display: block; height: 100%; background: linear-gradient(90deg, rgb(143, 211, 255), rgb(255, 255, 255)); }
+.dr .sw-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 18px; margin: 10px 0 4px; font-size: 14.5px; }
+.dr .sw-grid div { display: flex; justify-content: space-between; gap: 8px; }
+.dr .sw-grid small { font-size: 14.5px; color: rgba(200, 225, 255, 0.85); }
+.dr .sw-grid small::after { content: " :"; }
+.dr .sw-grid b { font-weight: 600; }
+.dr .sw-sec { margin-top: 12px; }
+.dr .sw-scroll { max-height: 306px; overflow: hidden; padding-right: 4px; } /* 34vh of the 900 px window */
+.dr .sw-sec h4 { margin: 0 0 6px; font-size: 13px; letter-spacing: 3px; color: rgba(200, 225, 255, 0.9); font-weight: 600; text-align: center; }
+.dr .sk { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; padding: 7px 4px; border-bottom: 1px dotted rgba(190, 220, 255, 0.35); }
+.dr .sk:last-child { border-bottom: 0; }
+.dr .sk .g { font-family: var(--display); font-size: 14px; width: 34px; height: 34px; border-radius: 4px; display: flex; align-items: center; justify-content: center; border: 1px solid currentcolor; line-height: 1; background: rgba(255, 255, 255, 0.06); }
+.dr .sk b { font-size: 14px; font-weight: 600; }
+.dr .sk .src { font-size: 11px; color: rgba(200, 225, 255, 0.75); margin-left: 6px; font-family: var(--sans); }
+.dr .sk p { margin: 2px 0 0; font-size: 12.5px; color: rgba(220, 235, 255, 0.85); line-height: 1.5; font-family: var(--sans); }
+.dr .sw .tier { border-color: rgba(255, 255, 255, 0.7); color: rgb(255, 255, 255); font-family: var(--sans); }
+.dr .sw .sw-note { margin: 6px 0 0; font-size: 12px; color: rgba(200, 225, 255, 0.7); }
+.dr .sw .sw-note.small { font-size: 11.5px; }
+.dr .sw .sw-count { font-weight: 400; font-size: 11.5px; color: rgba(200, 225, 255, 0.7); }
+.dr .sw-subs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px 14px; font-size: 14px; padding: 8px 0 2px; border-top: 1px dotted rgba(190, 220, 255, 0.35); }
+.dr .sw-subs > span { display: flex; justify-content: space-between; }
+.dr .sw-subs .sw-label { color: rgba(200, 225, 255, 0.85); }
+.dr .sw-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.dr .sw-chip { background: transparent; border: 1px solid rgba(255, 233, 166, 0.4); border-radius: 999px; padding: 2px 10px; font: inherit; font-size: 12.5px; color: rgba(255, 233, 166, 0.55); }
+.dr .sw-chip.on { background: rgba(255, 233, 166, 0.18); border-color: rgba(255, 233, 166, 0.9); color: rgb(255, 233, 166); }
+.dr .sw-chip .sw-fx { color: rgba(200, 225, 255, 0.75); font-size: 11px; }
+.dr .g.B { color: var(--t-B); }
+.dr .grade-flat { padding: 0; }
+.dr .sw-empty { font-size: 13px; opacity: 0.75; text-align: center; margin: 0; }
+.dr .sw-grid-main { margin: 6px 0 10px; }
+.dr .sw-sub { font-size: 12px; }
+.dr .sw-state { margin: 0; font-size: 13.5px; text-align: center; }
+.dr .sw-actions { margin-top: 14px; }
+
+/* the tablet: one narrator turn, cut to its body as the game's guide shows it */
+.boxes { width: 670px; height: 395px; overflow: hidden; }
+.dr .ai { margin: -1px; background: var(--panel); border: 1px solid rgb(22, 27, 41); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+.dr .ai .body { padding: 12px 14px; }
+.dr .narr { font-family: var(--serif); font-size: 15.5px; line-height: 1.85; white-space: pre-wrap; word-break: keep-all; overflow-wrap: anywhere; }
+.dr .narr .dlg { color: var(--sys); }
+.dr .sysmsg { margin: 10px 0 0; display: flex; flex-direction: column; gap: 6px; font-family: var(--sans); white-space: normal; }
+.dr .sysmsg.inl { margin: 14px 0 16px; }
+.dr .sysmsg .win {
+  --c: var(--sysc);
+  position: relative; align-self: center; width: fit-content; max-width: 100%; text-align: center; margin: 8px 0 0; padding: 9px 16px;
+  border: 1px solid color-mix(in srgb, var(--c) 70%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 14%, transparent), color-mix(in srgb, var(--c) 4%, transparent));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c) 25%, transparent), inset 0 0 10px color-mix(in srgb, var(--c) 10%, transparent);
+  color: var(--c); font-size: 13.5px; letter-spacing: 0.02em; border-radius: 3px;
+}
+.dr .sysmsg .win::before { content: attr(data-tag); position: absolute; top: -8px; left: 50%; transform: translateX(-50%); white-space: nowrap; padding: 0 6px; background: var(--panel); font-size: 10px; letter-spacing: 0.18em; color: var(--c); line-height: 16px; }
+.dr .sysmsg .win.sys-bad { --c: var(--danger); }
+.dr .sysmsg .win.sys-good { --c: var(--gold); }
+.dr .sysmsg .world {
+  margin: 10px 0 4px; padding: 16px 14px; text-align: center;
+  border-top: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--gold) 16%, transparent), transparent 70%);
+  color: color-mix(in srgb, var(--gold) 35%, var(--ink)); text-shadow: 0 0 10px color-mix(in srgb, var(--gold) 60%, transparent);
+}
+.dr .sysmsg .world .h { font-size: 11px; letter-spacing: 0.35em; color: var(--gold); margin-bottom: 6px; }
+.dr .sysmsg .world .b { font-size: 15.5px; font-weight: 700; line-height: 1.6; }
+.dr .sysmsg .star { margin: 6px 0; text-align: center; color: var(--gold); font-style: italic; font-size: 14px; }

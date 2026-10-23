@@ -1,0 +1,11 @@
+/* OTP Auth's app icon, an arrow, and 2FAS's: the move otpauth-to-2fas does. Set in Noto Sans KR. */
+html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; background: #eef2f5; color: #1e2b2a; }
+body { position: relative; font-family: "Noto Sans KR", sans-serif; }
+.app { position: absolute; top: 92px; width: 220px; text-align: center; }
+.from { left: 160px; }
+.to { left: 580px; }
+.icon { display: block; width: 220px; height: 220px; border-radius: 49px; box-shadow: 0 8px 0 #dcdedf; }
+.to .icon { box-sizing: border-box; padding: 21px 37px; background: #fff; }
+.name { margin: 25px 0 0; font-size: 34.5px; font-weight: 700; line-height: 1.3; }
+.note { margin: 4px 0 0; font-size: 24px; font-weight: 500; color: #6a7676; line-height: 1.3; }
+.arrow { position: absolute; left: 412px; top: 160px; width: 128px; height: 84px; fill: none; stroke: #1e2c2c; stroke-width: 10; stroke-linecap: round; stroke-linejoin: round; }
