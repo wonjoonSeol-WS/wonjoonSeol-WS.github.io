@@ -29,9 +29,9 @@ export const groups = [
         thumb: { en: 'fitgymlog-en.webp', ko: 'fitgymlog-ko.webp' },
         name: 'FitGymLog',
         what: {
-          en: 'A workout log you run from a Galaxy Fit band. Press play on the band to finish a set, feel a buzz when rest is over, load the bar by tapping plates.',
-          ko: '갤럭시 핏 밴드로 조작하는 운동 기록 앱이에요. 밴드에서 재생을 누르면 세트가 끝나고, 쉬는 시간이 끝나면 진동이 와요. 원판을 눌러 무게를 올려요.',
-          ja: 'Galaxy Fitバンドで操作する筋トレ記録アプリ。バンドの再生ボタンでセット完了、休憩が終わると振動でお知らせ、プレートをタップしてバーの重さを組めます。',
+          en: 'A workout log you run from a Galaxy Fit band or a Wear OS watch. Press play on the band or tap the watch to finish a set, feel a buzz when rest is over, load the bar by tapping plates.',
+          ko: '갤럭시 핏 밴드나 Wear OS 워치로 조작하는 운동 기록 앱이에요. 밴드에서 재생을 누르거나 워치를 누르면 세트가 끝나고, 쉬는 시간이 끝나면 진동이 와요. 원판을 눌러 무게를 올려요.',
+          ja: 'Galaxy FitバンドやWear OSウォッチで操作する筋トレ記録アプリ。バンドの再生ボタンかウォッチのタップでセット完了、休憩が終わると振動でお知らせ、プレートをタップしてバーの重さを組めます。',
         },
         try: { en: site('fitgymlog'), ko: site('fitgymlog') + 'ko/' },
         code: gh('fitgymlog'),

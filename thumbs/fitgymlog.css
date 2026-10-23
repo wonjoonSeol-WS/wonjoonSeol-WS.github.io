@@ -1,5 +1,6 @@
-/* FitGymLog card: the site's hero (wordmark, headline, lead) beside the Galaxy Fit3 drawing over a workout screenshot.
-   Positions follow the site's 1200x630 link preview (images/og-*.jpg) scaled by 0.8. */
+/* FitGymLog card: the site's hero (wordmark, headline, lead) beside a workout screenshot with the Galaxy Fit3 drawing
+   on one side and the Wear OS watch on the other. Positions follow the site's 1200x630 link preview (images/og-*.jpg)
+   scaled by 0.8; the watch, added to the hero later, sits where the hero puts it, raised to stay inside the card. */
 html, body { margin: 0; width: 960px; height: 504px; overflow: hidden; }
 body {
   position: relative;
@@ -35,6 +36,14 @@ h1 {
   border: 1px solid #26272b; border-radius: 24px; overflow: hidden; background: #000;
 }
 .phone img { display: block; width: 100%; height: auto; }
+
+/* the hero's .watch at 0.8157 (the phone here is 228.4px against its 280px) */
+.watch {
+  position: absolute; left: 810.8px; top: 374px; width: 122px; height: 122px; box-sizing: border-box;
+  border: 5.7px solid #1d1e21; border-radius: 50%; overflow: hidden; background: #000;
+  box-shadow: 0 .8px 1.6px rgba(0, 0, 0, .5), 0 8.2px 24.5px rgba(0, 0, 0, .45);
+}
+.watch img { display: block; width: 100%; height: 100%; }
 
 .fit3 {
   position: absolute; left: 539.8px; top: 184.8px; width: 188.2px; height: 313.6px;
