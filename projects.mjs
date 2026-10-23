@@ -5,13 +5,15 @@
 // `try` is where someone can start using it; `code` is the repo (leave it out while the repo is private).
 // `deprecated` marks an archived project on its card and always puts it at the end of the grid.
 // `license` is the SPDX id from the repo LICENSE, shown on the card.
-// Groups are shown in this order, and projects in the order listed, except that `top` comes first
-// and `deprecated` projects come last.
+// Groups are shown in this order, and projects in the order listed, except that `top` comes first,
+// then everything else, then `bottom`, then `deprecated` projects.
 const gh = (repo) => `https://github.com/wonjoonSeol/${repo}`;
 const site = (repo) => `https://wonjoonseol.github.io/${repo}/`;
 
 // Project ids shown first, in this order, in both the carousel and the project grid.
 export const top = ['fitgymlog', 'dice-roguelife'];
+// Project ids shown last, just before the deprecated ones.
+export const bottom = ['property-simulator'];
 
 export const groups = [
   {
@@ -87,6 +89,7 @@ export const groups = [
       },
       {
         id: 'property-simulator',
+        featured: true,
         thumb: { en: 'property-simulator.webp' },
         name: { en: 'Property simulator', ko: '부동산 투자 시뮬레이터', ja: '不動産投資シミュレーター' },
         what: {
@@ -108,6 +111,31 @@ export const groups = [
           ja: '韓国の不動産YouTubeチャンネルの新着動画を、yt-dlpで取得した字幕からLLMが要約し、タグを付け、見る価値があるかを評価します。アーカイブ済みで、今後はメンテナンスしません。',
         },
         code: gh('property-times'),
+      },
+    ],
+  },
+  {
+    id: 'tv',
+    name: { en: 'On your LG TV', ko: 'LG TV에서', ja: 'LGテレビで' },
+    projects: [
+      {
+        id: 'lg-luma',
+        license: 'MIT',
+        thumb: { en: 'lg-luma-en.webp', ko: 'lg-luma-ko.webp' },
+        name: { en: 'Luma for webOS 6', ko: 'webOS 6용 Luma', ja: 'webOS 6向けLuma' },
+        what: {
+          en: 'An Apple TV style Home screen for rooted LG TVs. My Korean app name, icon and logo fixes are now part of [Luma](https://github.com/ecklf/lg-luma), and my fork also replaces LG Home on webOS 6.',
+          ko: '루팅한 LG TV에 쓰는 애플 TV 스타일 홈 화면이에요. 제가 고친 한글 앱 이름, 아이콘, 로고는 [Luma](https://github.com/ecklf/lg-luma)에 합쳐졌고, 제 포크에서는 webOS 6에서도 LG 홈을 바꿀 수 있어요.',
+          ja: 'ルート化したLGテレビ向けの、Apple TV風のホーム画面。韓国語のアプリ名、アイコン、ロゴの修正は[Luma](https://github.com/ecklf/lg-luma)本体に取り込まれ、私のフォークではwebOS 6でもLGのホームを置き換えられます。',
+        },
+        warn: {
+          en: 'Needs a rooted TV. The risk of bricking it is low, but read the README before you install.',
+          ko: '루팅한 TV가 필요해요. 벽돌이 될 위험은 낮지만, 설치하기 전에 README를 꼭 읽어 주세요.',
+          ja: 'ルート化したテレビが必要です。文鎮化のリスクは低いですが、インストール前に必ずREADMEを読んでください。',
+        },
+        try: { en: gh('lg-luma') + '#about-this-fork', ko: gh('lg-luma') + '/blob/main/readme.ko.md' },
+        tryLabel: { en: 'Install', ko: '설치하기', ja: 'インストール' },
+        code: gh('lg-luma'),
       },
     ],
   },
@@ -199,31 +227,6 @@ export const groups = [
           ja: '途中で少しずつタイミングがずれる字幕を、別の言語の字幕に合わせて直します。コマンドライン、Bazarrフック、ローカルサーバーで使えます。',
         },
         code: gh('subsync-repair'),
-      },
-    ],
-  },
-  {
-    id: 'tv',
-    name: { en: 'On your LG TV', ko: 'LG TV에서', ja: 'LGテレビで' },
-    projects: [
-      {
-        id: 'lg-luma',
-        license: 'MIT',
-        thumb: { en: 'lg-luma-en.webp', ko: 'lg-luma-ko.webp' },
-        name: { en: 'Luma for webOS 6', ko: 'webOS 6용 Luma', ja: 'webOS 6向けLuma' },
-        what: {
-          en: 'An Apple TV style Home screen for rooted LG TVs. My fork of [Luma](https://github.com/ecklf/lg-luma) also replaces LG Home on webOS 6, shows Korean app names and adds 21 app icons.',
-          ko: '루팅한 LG TV에 쓰는 애플 TV 스타일 홈 화면이에요. [Luma](https://github.com/ecklf/lg-luma)를 포크해서 webOS 6에서도 LG 홈을 바꿀 수 있게 했고, 한글 앱 이름이 보이게 고치고, 앱 아이콘 21개를 더했어요.',
-          ja: 'ルート化したLGテレビ向けの、Apple TV風のホーム画面。[Luma](https://github.com/ecklf/lg-luma)のフォークで、webOS 6でもLGのホームを置き換えられるようにし、韓国語のアプリ名を表示できるよう直し、アプリアイコンを21個追加しました。',
-        },
-        warn: {
-          en: 'Needs a rooted TV. The risk of bricking it is low, but read the README before you install.',
-          ko: '루팅한 TV가 필요해요. 벽돌이 될 위험은 낮지만, 설치하기 전에 README를 꼭 읽어 주세요.',
-          ja: 'ルート化したテレビが必要です。文鎮化のリスクは低いですが、インストール前に必ずREADMEを読んでください。',
-        },
-        try: { en: gh('lg-luma') + '#about-this-fork', ko: gh('lg-luma') + '/blob/main/readme.ko.md' },
-        tryLabel: { en: 'Install', ko: '설치하기', ja: 'インストール' },
-        code: gh('lg-luma'),
       },
     ],
   },

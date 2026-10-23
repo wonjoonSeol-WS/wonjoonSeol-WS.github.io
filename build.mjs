@@ -1,7 +1,7 @@
 // Builds index.html (English), ko/index.html (Korean) and ja/index.html (Japanese) from projects.mjs.
 // Run: node build.mjs
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { groups, top } from './projects.mjs';
+import { groups, top, bottom } from './projects.mjs';
 
 const ORIGIN = 'https://wonjoonseol.github.io/';
 // GoatCounter site code (the name before .goatcounter.com); empty means no counter.
@@ -107,8 +107,8 @@ const warn = (p, lang) => (p.warn ? `<p class="warn" role="note">${esc(pick(p.wa
 // Korean wraps only at spaces, so a long lead can leave a dangling phrase; keep each sentence whole when it fits
 const sentences = (s) => s.split(/(?<=[.?!])\s+/).map((x) => `<span class="sentence">${x}</span>`).join(' ');
 const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '');
-// `top` projects first and deprecated ones last; sort is stable, so the rest keep their listed order
-const rank = (p) => (top.includes(p.id) ? top.indexOf(p.id) : top.length + (p.deprecated ? 1 : 0));
+// `top` first, then the rest, then `bottom`, then deprecated; sort is stable, so ties keep their listed order
+const rank = (p) => (top.includes(p.id) ? top.indexOf(p.id) : top.length + (p.deprecated ? 2 : bottom.includes(p.id) ? 1 : 0));
 const byTop = (a, b) => rank(a) - rank(b);
 
 function thumb(p, lang, eager = false) {
