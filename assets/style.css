@@ -49,7 +49,7 @@ html:lang(ja) {
 a { color: var(--link); text-underline-offset: .2em; text-decoration-thickness: 1px; }
 a:focus-visible, button:focus-visible, .track:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
 ul { list-style: none; margin: 0; padding: 0; }
-.wrap { max-width: 1240px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); }
+.wrap { max-width: 1400px; margin: 0 auto; padding-inline: clamp(20px, 4vw, 48px); }
 
 /* header */
 .top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 22px; font-size: 15px; }
@@ -165,8 +165,8 @@ h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; l
 .filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .filters button:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
 
-/* every project in one grid */
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 48px 36px; }
+/* every project in one grid, up to four columns at the widest */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 272px), 1fr)); gap: 48px 32px; }
 .card { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 16px; }
 .card .thumb { border-radius: 8px; }
 .card-body { display: flex; flex-direction: column; gap: 6px; flex: 1; }

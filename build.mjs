@@ -1,7 +1,7 @@
 // Builds index.html (English), ko/index.html (Korean) and ja/index.html (Japanese) from projects.mjs.
 // Run: node build.mjs
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { groups } from './projects.mjs';
+import { groups, top } from './projects.mjs';
 
 const ORIGIN = 'https://wonjoonseol.github.io/';
 // GoatCounter site code (the name before .goatcounter.com); empty means no counter.
@@ -10,7 +10,7 @@ const GOATCOUNTER = 'wonjoonseol';
 const text = {
   en: {
     title: 'Wonjoon Seol: projects',
-    description: 'Small projects by Wonjoon Seol: Android apps, a subtitle extension, a property simulator, a game, Claude add-ons and Windows utilities.',
+    description: 'Small projects by Wonjoon Seol: Android apps, a subtitle extension, a property simulator, a game, Claude add-ons, Windows utilities and an LG TV launcher.',
     h1: 'Small tools, free to try.',
     lead: 'Things I built for my own problems and put on GitHub. Some are polished, some are slop. Pick one by where you would use it.',
     by: 'Wonjoon Seol on GitHub',
@@ -34,7 +34,7 @@ const text = {
   },
   ko: {
     title: 'Wonjoon Seol: 프로젝트',
-    description: 'Wonjoon Seol이 만든 작은 프로젝트를 모아 뒀어요. 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구가 있어요.',
+    description: 'Wonjoon Seol이 만든 작은 프로젝트를 모아 뒀어요. 안드로이드 앱, 자막 확장 프로그램, 부동산 시뮬레이터, 게임, Claude 애드온, 윈도우 도구, LG TV 런처가 있어요.',
     h1: '작은 도구들, 마음껏 써 보세요.',
     lead: '제가 불편해서 직접 만든 것들이에요. 잘 다듬은 것도, 대충 만든 것도 있어요. 쓰는 곳별로 나눠 뒀어요.',
     by: 'GitHub의 Wonjoon Seol',
@@ -58,7 +58,7 @@ const text = {
   },
   ja: {
     title: 'Wonjoon Seol: オープンソース',
-    description: 'Wonjoon Seolが作った小さなオープンソースツール集: Androidアプリ、字幕の拡張機能、Claudeのアドオン、Windowsツール。',
+    description: 'Wonjoon Seolが作った小さなオープンソースツール集: Androidアプリ、字幕の拡張機能、Claudeのアドオン、Windowsツール、LGテレビのランチャー。',
     h1: '小さなツール、気軽にどうぞ。',
     lead: '自分の困りごとを解決するために作ったものをGitHubに置いています。しっかり作り込んだものもあれば、雑なものもあります。使う場所から選んでください。',
     by: 'GitHubのWonjoon Seol',
@@ -95,6 +95,7 @@ const SHORT = {
   games: { en: 'Games', ko: '게임', ja: 'ゲーム' },
   claude: { en: 'Claude', ko: 'Claude', ja: 'Claude' },
   desktop: { en: 'PC', ko: 'PC', ja: 'PC' },
+  tv: { en: 'TV', ko: 'TV', ja: 'テレビ' },
   tools: { en: 'Tools', ko: '도구', ja: 'ツール' },
 };
 
@@ -106,6 +107,9 @@ const warn = (p, lang) => (p.warn ? `<p class="warn" role="note">${esc(pick(p.wa
 // Korean wraps only at spaces, so a long lead can leave a dangling phrase; keep each sentence whole when it fits
 const sentences = (s) => s.split(/(?<=[.?!])\s+/).map((x) => `<span class="sentence">${x}</span>`).join(' ');
 const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '');
+// `top` projects first and deprecated ones last; sort is stable, so the rest keep their listed order
+const rank = (p) => (top.includes(p.id) ? top.indexOf(p.id) : top.length + (p.deprecated ? 1 : 0));
+const byTop = (a, b) => rank(a) - rank(b);
 
 function thumb(p, lang, eager = false) {
   const file = pick(p.thumb, lang);
@@ -160,7 +164,7 @@ function card(p, g, lang, i) {
 
 function page(lang) {
   const t = text[lang];
-  const featured = groups.flatMap((g) => g.projects).filter((p) => p.featured);
+  const featured = groups.flatMap((g) => g.projects).filter((p) => p.featured).sort(byTop);
   return `<!doctype html>
 <html lang="${lang}">
 <head>
@@ -213,7 +217,7 @@ function page(lang) {
       ${groups.map((g) => `<button type="button" data-filter="${g.id}" aria-pressed="false">${esc(pick(SHORT[g.id], lang))}</button>`).join('\n      ')}
     </nav>
 
-    <ul class="grid">${groups.flatMap((g) => g.projects.map((p) => [p, g])).map(([p, g], i) => card(p, g, lang, i)).join('')}
+    <ul class="grid">${groups.flatMap((g) => g.projects.map((p) => [p, g])).sort(([a], [b]) => byTop(a, b)).map(([p, g], i) => card(p, g, lang, i)).join('')}
     </ul>
     </section>
   </main>
@@ -253,12 +257,15 @@ function page(lang) {
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));
       var chips = Array.prototype.slice.call(document.querySelectorAll('.filters button'));
-      // a card left alone on the last row of three spans the row (styled wide on desktop only)
+      // a card left alone on the last row spans the row (styled wide on desktop only)
+      var grid = document.querySelector('.grid');
       function balance() {
         var shown = cards.filter(function (c) { return !c.hidden; });
+        var columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
         cards.forEach(function (c) { c.classList.remove('wide'); });
-        if (shown.length % 3 === 1) shown[shown.length - 1].classList.add('wide');
+        if (columns > 1 && shown.length % columns === 1) shown[shown.length - 1].classList.add('wide');
       }
+      window.addEventListener('resize', balance);
       chips.forEach(function (b) {
         b.addEventListener('click', function () {
           var f = b.getAttribute('data-filter');
