@@ -169,20 +169,6 @@ export const groups = [
     name: { en: 'Inside Claude', ko: 'Claude 안에서', ja: 'Claudeの中で' },
     projects: [
       {
-        id: 'language-mistake-tracker',
-        license: 'MIT',
-        thumb: { en: 'language-mistake-tracker.webp' },
-        name: 'Language mistake tracker',
-        what: {
-          en: 'Turns the corrections Claude gives you in chat into a review sheet: your most common mistakes, repeated habits and rules with memory tricks.',
-          ko: '대화하다가 Claude가 고쳐 준 표현을 복습 시트로 모아 줘요. 자주 하는 실수, 반복되는 습관, 외우기 쉬운 규칙까지 정리해요.',
-          ja: '会話の中でClaudeが直してくれた表現を復習シートにまとめます。よくある間違い、繰り返しがちな癖、覚え方つきのルールまで。',
-        },
-        try: { en: gh('language-mistake-tracker') + '#install-and-update-in-the-claude-app-phones-too', ko: gh('language-mistake-tracker') + '/blob/main/README.ko.md' },
-        tryLabel: { en: 'Install', ko: '설치하기', ja: 'インストール' },
-        code: gh('language-mistake-tracker'),
-      },
-      {
         id: 'claude-side-insights',
         license: 'MIT',
         thumb: { en: 'claude-side-insights.webp' },
@@ -195,6 +181,20 @@ export const groups = [
         try: { en: gh('claude-side-insights') + '#install', ko: gh('claude-side-insights') + '/blob/main/README.ko.md', ja: gh('claude-side-insights') + '/blob/main/README.ja.md' },
         tryLabel: { en: 'Install', ko: '설치하기', ja: 'インストール' },
         code: gh('claude-side-insights'),
+      },
+      {
+        id: 'language-mistake-tracker',
+        license: 'MIT',
+        thumb: { en: 'language-mistake-tracker.webp' },
+        name: 'Language mistake tracker',
+        what: {
+          en: 'Turns the corrections Claude gives you in chat into a review sheet: your most common mistakes, repeated habits and rules with memory tricks.',
+          ko: '대화하다가 Claude가 고쳐 준 표현을 복습 시트로 모아 줘요. 자주 하는 실수, 반복되는 습관, 외우기 쉬운 규칙까지 정리해요.',
+          ja: '会話の中でClaudeが直してくれた表現を復習シートにまとめます。よくある間違い、繰り返しがちな癖、覚え方つきのルールまで。',
+        },
+        try: { en: gh('language-mistake-tracker') + '#install-and-update-in-the-claude-app-phones-too', ko: gh('language-mistake-tracker') + '/blob/main/README.ko.md' },
+        tryLabel: { en: 'Install', ko: '설치하기', ja: 'インストール' },
+        code: gh('language-mistake-tracker'),
       },
     ],
   },
