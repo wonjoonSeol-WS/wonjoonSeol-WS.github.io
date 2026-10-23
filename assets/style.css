@@ -123,6 +123,14 @@ h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; l
 }
 .step:hover { border-color: var(--ink); }
 .step svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+/* one dot per slide under the carousel; the current one is longer. The button is the tap target, the dot is drawn inside */
+.dots { display: flex; justify-content: center; margin-top: 12px; }
+.dot { padding: 8px 4px; border: 0; background: none; cursor: pointer; }
+.dot::before { content: ""; display: block; width: 8px; height: 8px; border-radius: 999px; background: var(--muted); opacity: .45; transition: width .25s ease, opacity .25s ease; }
+.dot:hover::before { opacity: .8; }
+.dot[aria-current="true"]::before { width: 24px; background: var(--ink); opacity: 1; }
+.dot:focus-visible { outline: 2px solid var(--link); outline-offset: 1px; border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) { .dot::before { transition: none; } }
 .track {
   display: flex;
   overflow-x: auto;

@@ -90,6 +90,13 @@
           </div>
         </li>
       </ul>
+      <div class="dots" role="group" aria-label="専用サイトがあるプロジェクト">
+        <button type="button" class="dot" data-slide="0" aria-label="1 / 5: FitGymLog" aria-current="true"></button>
+        <button type="button" class="dot" data-slide="1" aria-label="2 / 5: Dice Roguelife"></button>
+        <button type="button" class="dot" data-slide="2" aria-label="3 / 5: QuietBuzz"></button>
+        <button type="button" class="dot" data-slide="3" aria-label="4 / 5: Subpair"></button>
+        <button type="button" class="dot" data-slide="4" aria-label="5 / 5: 不動産投資シミュレーター"></button>
+      </div>
     </section>
 
     <section class="all-projects" aria-labelledby="all-h">
@@ -274,6 +281,19 @@
       document.querySelectorAll('.step').forEach(function (b) {
         b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
       });
+      // dots: one per slide, marking the current one; clicking a dot jumps to its slide
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+      function mark() {
+        var i = current();
+        dots.forEach(function (d, j) {
+          if (j === i) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+      }
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () { go(Number(d.getAttribute('data-slide'))); });
+      });
+      track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); }, { passive: true });
       track.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }

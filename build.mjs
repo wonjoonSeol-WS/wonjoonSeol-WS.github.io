@@ -208,6 +208,9 @@ function page(lang) {
       </div>
       <ul class="track" tabindex="0">${featured.map((p, i) => slide(p, lang, i, featured.length)).join('')}
       </ul>
+      <div class="dots" role="group" aria-label="${t.sites}">
+        ${featured.map((p, i) => `<button type="button" class="dot" data-slide="${i}" aria-label="${i + 1} / ${featured.length}: ${esc(pick(p.name, lang))}"${i === 0 ? ' aria-current="true"' : ''}></button>`).join('\n        ')}
+      </div>
     </section>
 
     <section class="all-projects" aria-labelledby="all-h">
@@ -243,6 +246,19 @@ function page(lang) {
       document.querySelectorAll('.step').forEach(function (b) {
         b.addEventListener('click', function () { go(current() + Number(b.getAttribute('data-step'))); });
       });
+      // dots: one per slide, marking the current one; clicking a dot jumps to its slide
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+      function mark() {
+        var i = current();
+        dots.forEach(function (d, j) {
+          if (j === i) d.setAttribute('aria-current', 'true');
+          else d.removeAttribute('aria-current');
+        });
+      }
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () { go(Number(d.getAttribute('data-slide'))); });
+      });
+      track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); }, { passive: true });
       track.addEventListener('keydown', function (e) {
         if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
         if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
