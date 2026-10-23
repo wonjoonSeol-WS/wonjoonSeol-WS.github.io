@@ -1,5 +1,6 @@
 // One entry per project. `thumb` is a file in assets/thumbs (960x504); projects without one get a type-only tile.
 // `featured` projects have their own website and also appear in the carousel at the top.
+// A project's name links to that website (`try`), or to `code` when it is not featured.
 // `warn` is shown above the links when trying it blindly can hurt. `what` may contain [text](https://...) links.
 // `also` is an optional second way to use it ({ label, url }).
 // `try` is where someone can start using it; `code` is the repo (leave it out while the repo is private).

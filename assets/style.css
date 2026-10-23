@@ -105,6 +105,8 @@ h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; l
   letter-spacing: -.02em;
   overflow-wrap: anywhere;
 }
+.name a, .slide-name a { color: inherit; text-decoration: none; }
+.name a:hover, .slide-name a:hover { text-decoration: underline; text-decoration-thickness: .06em; }
 .what { margin: 0; max-width: 36rem; }
 .links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin: 0; font-weight: 500; }
 .try { background: var(--note); color: var(--note-ink); text-decoration: none; padding: 7px 16px; border-radius: 4px; font-weight: 600; }
@@ -225,6 +227,21 @@ h1:lang(ko), h1:lang(ja) { font-variation-settings: normal; line-height: 1.12; l
   .card .what { font-size: 14px; }
   .name { font-size: 1.15rem; }
 }
+
+/* a click on a thumbnail opens it full size */
+.zoom { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.lightbox { padding: 0; border: 0; background: none; max-width: none; max-height: none; overflow: visible; cursor: zoom-out; }
+.lightbox::backdrop { background: rgba(8, 12, 12, .85); }
+.lightbox img { display: block; width: min(1200px, 92vw, calc(88vh * 960 / 504)); height: auto; border-radius: 10px; }
+.lightbox .close {
+  position: fixed; top: 16px; right: 16px;
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255, 255, 255, .4); border-radius: 50%;
+  background: transparent; color: #fff; cursor: pointer;
+}
+.lightbox .close:hover { border-color: #fff; }
+.lightbox .close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
 /* a caution shown before the links, for projects that can do harm if tried blindly */
 .warn { margin: 0; padding: 8px 12px; border-left: 3px solid var(--danger); background: var(--danger-soft); color: var(--ink); font-size: 15px; font-weight: 500; border-radius: 0 4px 4px 0; }

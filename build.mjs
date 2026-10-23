@@ -25,6 +25,8 @@ const text = {
     code: 'Code',
     deprecated: 'Deprecated',
     license: 'License',
+    enlarge: 'Enlarge image',
+    close: 'Close',
     fromNote: (name) => `You came from ${name}. Here is everything else.`,
     here: 'You came from this one',
     footer: 'Everything is free to use, and each card shows its license. Found a bug? Open an issue on that project.',
@@ -49,6 +51,8 @@ const text = {
     code: '코드',
     deprecated: '지원 종료',
     license: '라이선스',
+    enlarge: '이미지 크게 보기',
+    close: '닫기',
     fromNote: (name) => `${name}에서 오셨네요. 나머지 프로젝트도 둘러보세요.`,
     here: '여기서 오셨어요',
     footer: '모두 무료예요. 라이선스는 카드마다 적어 뒀어요. 버그를 찾으면 그 프로젝트에 이슈를 남겨 주세요.',
@@ -73,6 +77,8 @@ const text = {
     code: 'コード',
     deprecated: '開発終了',
     license: 'ライセンス',
+    enlarge: '画像を拡大',
+    close: '閉じる',
     fromNote: (name) => `${name}から来られたんですね。ほかのプロジェクトもどうぞ。`,
     here: 'ここから来られました',
     footer: 'すべて無料です。ライセンスは各カードに書いてあります。バグを見つけたら、そのプロジェクトにIssueを立ててください。',
@@ -111,10 +117,18 @@ const count = (name) => (GOATCOUNTER ? ` data-goatcounter-click="${name}"` : '')
 const rank = (p) => (top.includes(p.id) ? top.indexOf(p.id) : top.length + (p.deprecated ? 2 : bottom.includes(p.id) ? 1 : 0));
 const byTop = (a, b) => rank(a) - rank(b);
 
-function thumb(p, lang, eager = false) {
+// A thumbnail is a button that opens the image full size; `extra` is a class added to that button.
+function thumb(p, lang, eager = false, extra = '') {
   const file = pick(p.thumb, lang);
   if (!file) return `<div class="thumb thumb-type" aria-hidden="true"><span>${esc(pick(p.name, lang))}</span></div>`;
-  return `<img class="thumb" src="${text[lang].root}assets/thumbs/${file}" width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}>`;
+  return `<button type="button" class="zoom${extra ? ` ${extra}` : ''}" aria-label="${text[lang].enlarge}: ${esc(pick(p.name, lang))}"${count(`zoom-${p.id}`)}><img class="thumb" src="${text[lang].root}assets/thumbs/${file}" width="960" height="504" alt=""${eager ? '' : ' loading="lazy"'}></button>`;
+}
+
+// The project's name links to its own website, or else to its GitHub repo.
+function title(p, lang) {
+  const url = p.featured ? pick(p.try, lang) : p.code;
+  const name = esc(pick(p.name, lang));
+  return url ? `<a href="${esc(url)}"${count(`title-${p.id}`)}>${name}</a>` : name;
 }
 
 function also(p, lang) {
@@ -136,9 +150,9 @@ function slide(p, lang, i, n) {
   const t = text[lang];
   return `
         <li class="slide" id="slide-${p.id}" aria-roledescription="slide" aria-label="${i + 1} / ${n}: ${esc(pick(p.name, lang))}">
-          <a class="slide-shot" href="${esc(pick(p.try, lang))}" tabindex="-1"${count(`slide-${p.id}`)}>${thumb(p, lang, i === 0)}</a>
+          ${thumb(p, lang, i === 0, 'slide-shot')}
           <div class="slide-text">
-            <h3 class="slide-name">${esc(pick(p.name, lang))}</h3>
+            <h3 class="slide-name">${title(p, lang)}</h3>
             <p class="what">${rich(pick(p.what, lang))}</p>
           ${warn(p, lang)}
             <p class="links"><a class="try" href="${esc(pick(p.try, lang))}"${count(`try-${p.id}`)}>${esc(pick(p.tryLabel, lang) ?? t.visit)}</a>${also(p, lang)}${code(p, lang)}</p>
@@ -153,7 +167,7 @@ function card(p, g, lang, i) {
           ${thumb(p, lang, i < 4)}
           <div class="card-body">
           <p class="platform">${esc(pick(SHORT[g.id], lang))}${p.deprecated ? `<span class="deprecated">${t.deprecated}</span>` : ''}${p.license ? `<span class="license" title="${t.license}">${esc(p.license)}</span>` : ''}</p>
-          <h3 class="name">${esc(pick(p.name, lang))}</h3>
+          <h3 class="name">${title(p, lang)}</h3>
           <p class="here-note">${t.here}</p>
           <p class="what">${rich(pick(p.what, lang))}</p>
           ${warn(p, lang)}
@@ -230,6 +244,11 @@ function page(lang) {
     <a href="https://github.com/wonjoonSeol?tab=repositories">${t.all}</a>
   </footer>
 
+  <dialog class="lightbox">
+    <img alt="">
+    <button type="button" class="close" aria-label="${t.close}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </dialog>
+
   <script>
     (function () {
       // Carousel: arrow buttons and arrow keys step through the slides; it also moves on its own every 5 s,
@@ -268,7 +287,20 @@ function page(lang) {
       carousel.addEventListener('pointerleave', function () { paused = false; });
       carousel.addEventListener('focusin', function () { paused = true; });
       carousel.addEventListener('focusout', function () { paused = false; });
-      if (!reduce) setInterval(function () { if (!paused && !document.hidden) go(current() + 1); }, 5000);
+      var box = document.querySelector('.lightbox');
+      if (!reduce) setInterval(function () { if (!paused && !document.hidden && !box.open) go(current() + 1); }, 5000);
+
+      // Images: clicking or tapping a thumbnail opens it full size until the next click or Esc.
+      var boxImg = box.querySelector('img');
+      document.querySelectorAll('.zoom').forEach(function (b) {
+        var img = b.querySelector('img');
+        b.addEventListener('click', function () {
+          boxImg.src = img.currentSrc || img.src;
+          boxImg.alt = b.closest('li').querySelector('h3').textContent;
+          box.showModal();
+        });
+      });
+      box.addEventListener('click', function () { box.close(); });
 
       // Filter chips: show only the projects for one platform (everything is visible without script).
       var cards = Array.prototype.slice.call(document.querySelectorAll('.grid .card'));
